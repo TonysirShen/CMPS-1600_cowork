@@ -1,9 +1,9 @@
 package com.entities;
 
-public class Character implements IEntity, IThing{
+public class Character implements IEntity, IThing<Character.BodyTypes>{
 	private String name;
-	private BodyType bodyType;
-	private enum BodyType{A,B,C,D,E,F,G,H};
+	protected BodyTypes bodyType;
+	enum BodyTypes{A,B,C,D,E,F,G,H};
 	private Clothing clothing;
 	private enum Clothing{Bandit,Beggar,LightArmour,HeavyArmour,Merchant,Noble,Peasant,Priest};
 	private HairStyle hairStyle;
@@ -14,15 +14,15 @@ public class Character implements IEntity, IThing{
 	    this(name, null);
 	}
 
-	public Character(String name, BodyType bodyType) {
+	public Character(String name, BodyTypes bodyType) {
 	    this(name, bodyType, null);
 	}
 
-	public Character(String name, BodyType bodyType, Clothing clothing) {
+	public Character(String name, BodyTypes bodyType, Clothing clothing) {
 	    this(name, bodyType, clothing, null);
 	}
 
-	public Character(String name, BodyType bodyType, Clothing clothing, HairStyle hairStyle) {
+	public Character(String name, BodyTypes bodyType, Clothing clothing, HairStyle hairStyle) {
 	    this.name = name;
 	    this.bodyType = bodyType;
 	    this.clothing = clothing;
@@ -31,14 +31,12 @@ public class Character implements IEntity, IThing{
 	
 	//interface methods
 	@Override
-	public BodyType getTemplate() {
-		// TODO Auto-generated method stub
+	public BodyTypes getTemplate() {
 		return bodyType;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 }
