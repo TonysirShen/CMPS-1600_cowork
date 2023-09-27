@@ -7,15 +7,16 @@ public class Item implements IEntity, IThing<Item.Items>{
 	// constructor
 	public Item(){}
 	public Item(String name, Items input) {
-		this.
-	
+		this.name = name;
+		this.template = input;
+	}
 	// Interface methods
 	@Override
 	public Items getTemplate() {
 		return template;
 	}
 	@Override
-	public String getName() 
+	public String getName() {
 		return name;
 	}
 	
