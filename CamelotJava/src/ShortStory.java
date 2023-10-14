@@ -1,6 +1,7 @@
 import com.storygraph.ActionMap;
 import com.storygraph.INode;
 import com.storygraph.Node;
+import com.actions.ActionSequence;
 import com.entities.*;
 import com.entities.Character;
 import com.entities.Things.ThingNames;
@@ -26,5 +27,7 @@ public class ShortStory implements IStory{
 	}
 
 	//Action Sequence
-	private ActionSequence getInitSequence();{
+	private ActionSequence getInitSQ(){
+		return null;
+	}
 }
