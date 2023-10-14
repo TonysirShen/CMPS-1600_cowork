@@ -1,7 +1,9 @@
 package com.entities;
 
 import java.util.Hashtable;
+
 import java.util.Optional;
+
 public class Things {
 	public enum ThingNames{ Tom, Home, Sword} 
 	private static Hashtable<ThingNames, IThing<?>> list=new Hashtable<>();
