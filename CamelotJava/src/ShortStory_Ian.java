@@ -15,7 +15,11 @@ public class ShortStory_Ian implements IStory{
 	
 	
 	private enum NodeLabels{
-		Start, Init
+		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
+		gethelmet2, successSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
+		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
+		GameOVER, GreatHall
+		
 	}
 	
 	public ShortStory_Ian() {
