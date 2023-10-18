@@ -3,9 +3,9 @@ package com.entities;
 public class Character implements IEntity, IThing<Character.BodyTypes>{
 	private String name;
 	protected BodyTypes bodyType;
-	enum BodyTypes{A,B,C,D,E,F,G,H};
+	public enum BodyTypes{A,B,C,D,E,F,G,H};
 	private Clothing clothing;
-	private enum Clothing{Bandit,Beggar,LightArmour,HeavyArmour,Merchant,Noble,Peasant,Priest};
+	public enum Clothing{Bandit,Beggar,LightArmour,HeavyArmour,Merchant,Noble,Peasant,Priest};
 	private HairStyle hairStyle;
 	private enum HairStyle{Long,Spiky,Short};
 	

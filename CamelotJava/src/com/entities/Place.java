@@ -1,10 +1,17 @@
 package com.entities;
 
+import com.entities.Things.ThingNames;
+
 public class Place implements IThing<Place.Places> {
 	private String place_name;
 	private Places template; 
-	enum Places {AlchemyShop,Blacksmith,Bridge,Camp,CastleBedroom,CastleCrossroads,City,Cottage,Courtyard};
+	public enum Places {AlchemyShop,Blacksmith,Bridge,Camp,CastleBedroom,CastleCrossroads,City,Cottage,Courtyard};
 	
+	public Place(ThingNames name, Places template) {
+		this.place_name = name.toString();
+		this.template = template;// TODO Auto-generated constructor stub
+	}
+
 	public void Place(String name, Places template) {
 		this.place_name = name;
 		this.template = template;

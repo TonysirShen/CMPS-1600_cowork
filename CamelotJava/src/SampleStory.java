@@ -32,9 +32,9 @@ public class SampleStory implements IStory{
 	
 	@Override
 	public void getThings() {
-		 tom=new Character(ThingNames.Tom);
+		 tom=new Character(ThingNames.Tom.toString()t);
 		 home = new Place(ThingNames.Home, Places.Cottage);
-		 sword = new Item(ThingNames.Sword, Items.Sword);
+		 Things.add(ThingNames.Sword, new Item(ThingNames.Sword, Items.Sword));
 	}
 	
 	@Override
@@ -83,7 +83,7 @@ public class SampleStory implements IStory{
 		sequence.combineWith(new CharacterCreation(tom));
 		sequence.add(new Create<Place>(home));
 		sequence.add(new Position(tom, home));
-		sequence.add(new Create<Item>(sword));
+		sequence.add(new Create<Item>(Things.get(ThingNames.Sword())));
 		sequence.add(new Position(sword, home, "Shelf"));
 		sequence.add(new SetCameraFocus(tom));
 		sequence.add(new ShowMenu(true));
