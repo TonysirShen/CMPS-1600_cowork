@@ -6,10 +6,11 @@ import com.entities.*;
 import com.entities.Character;
 import com.entities.Things.ThingNames;
 import com.sequences.CharacterCreation;
+import java.util.Hashtable;
 
 public class ShortStory_Ian implements IStory{
-	private Character jojo;
-	private Place home;
+	private Hashtable<ThingNames,Character> characterList;
+	private Hashtable<>
 	
 	private enum ActionNames{};
 	
@@ -18,8 +19,7 @@ public class ShortStory_Ian implements IStory{
 		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
 		gethelmet2, successSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
 		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
-		GameOVER, GreatHall
-		
+		GameOVER, GreatHall	
 	}
 	
 	public ShortStory_Ian() {
@@ -50,9 +50,10 @@ public class ShortStory_Ian implements IStory{
 		SQ.combineWith(new CharacterCreation(jojo));
 		SQ.add(new Create<Place>(home));
 		SQ.add(new Position(jojo, home));
-		SQ.add(SetCamera);
+		SQ.add(new SetCameraFocus(jojo));
 		
 		return null;
 	}
+	private ActionSequence getStartSQ() {return null;}
 	
 }

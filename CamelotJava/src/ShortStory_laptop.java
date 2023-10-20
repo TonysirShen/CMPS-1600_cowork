@@ -12,7 +12,12 @@ public class ShortStory_laptop implements IStory{
 	private Place home;
 	
 	private enum ActionNames{};
-	private enum NodeNames{Init,Start};
+	private enum NodeLabels{
+		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
+		gethelmet2, successSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
+		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
+		GameOVER, GreatHall	
+	}
 	
 	public ShortStory_laptop() {
 		getThings();

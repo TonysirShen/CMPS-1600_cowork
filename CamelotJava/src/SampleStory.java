@@ -17,7 +17,7 @@ import com.storygraph.*;
 public class SampleStory implements IStory{
 	private Item sword;
 	private Character tom;
-	private Place home;
+	
 	
 	private enum ActionNames{
 		Take, Exit
@@ -34,6 +34,7 @@ public class SampleStory implements IStory{
 	public void getThings() {
 		 tom=new Character(ThingNames.Tom.toString()t);
 		 home = new Place(ThingNames.Home, Places.Cottage);
+		 Things.add(ThingNames.Home, new Place(ThingNames.Home, Places.Cottage))
 		 Things.add(ThingNames.Sword, new Item(ThingNames.Sword, Items.Sword));
 	}
 	
@@ -79,12 +80,12 @@ public class SampleStory implements IStory{
 	}
 	
 	private ActionSequence getInitSequence() {
+		Place home = ((Place)Things.get(ThingNames.Home).get());
 		var sequence = new ActionSequence();
 		sequence.combineWith(new CharacterCreation(tom));
-		sequence.add(new Create<Place>(home));
-		sequence.add(new Position(tom, home));
+		sequence.add(new Create<Place>(Things.get(ThingNames.Home)
 		sequence.add(new Create<Item>(Things.get(ThingNames.Sword())));
-		sequence.add(new Position(sword, home, "Shelf"));
+		sequence.add(new Position(sword, ((Place)Things.get(ThingNames.Home).get()), "Shelf"));
 		sequence.add(new SetCameraFocus(tom));
 		sequence.add(new ShowMenu(true));
 		return sequence;
