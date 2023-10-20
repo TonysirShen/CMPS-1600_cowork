@@ -5,7 +5,7 @@ import com.entities.Things.ThingNames;
 public class Item implements IEntity, IThing<Item.Items>{
 	private String name;
 	private Items template;
-	public enum Items{SpellBook,Sword,Torch,Scroll,LitTorch,Helmet}
+	public enum Items{SpellBook,Sword,Torch,Scroll,LitTorch,Helmet, GreenPotion}
 	// constructor
 	public Item(){}
 	public Item(String name, Items input) {

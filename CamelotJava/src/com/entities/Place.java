@@ -5,7 +5,7 @@ import com.entities.Things.ThingNames;
 public class Place implements IThing<Place.Places> {
 	private String place_name;
 	private Places template; 
-	public enum Places {AlchemyShop,Blacksmith,Bridge,Camp,CastleBedroom,CastleCrossroads,City,Cottage,Courtyard};
+	public enum Places {cottage,city,camp,castlecrossroad,GreatHall,Spookypath,Dungeon};
 	
 	public Place(ThingNames name, Places template) {
 		this.place_name = name.toString();
