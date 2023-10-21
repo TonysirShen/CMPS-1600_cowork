@@ -1,15 +1,15 @@
 package com.entities;
 
-import com.entities.Things.ThingNames;
+import com.entities.IThing.ThingNames;
 
 public class Character implements IEntity, IThing<Character.BodyTypes>{
-	private ThingNames name;
+	private String name;
 	protected BodyTypes bodyType;
 	public enum BodyTypes{A,B,C,D,E,F,G,H};
-	private Clothing clothing;
+	private Clothing clothing = Clothing.Peasant;
 	public enum Clothing{Bandit,Beggar,LightArmour,HeavyArmour,Merchant,Noble,Peasant,Priest};
-	private HairStyle hairStyle;
-	private enum HairStyle{Long,Spiky,Short};
+	private HairStyle hairStyle = HairStyle.Short;
+	public enum HairStyle{Long,Spiky,Short};
 	
 	//Constructor
 	public Character(String name) {
@@ -24,12 +24,11 @@ public class Character implements IEntity, IThing<Character.BodyTypes>{
 	    this(name, bodyType, clothing, null);
 	}
 
-	public Character(ThingNames name, BodyTypes bodyType, Clothing clothing, HairStyle hairStyle) {
+	public Character(String name, BodyTypes bodyType, Clothing clothing, HairStyle hairStyle) {
 	    this.name = name;
 	    this.bodyType = bodyType;
 	    this.clothing = clothing;
 	    this.hairStyle = hairStyle;
-	    Things.add(ThingNames.(this.name), this);
 	}
 	
 	public Character(ThingNames name) {
@@ -57,3 +56,13 @@ public class Character implements IEntity, IThing<Character.BodyTypes>{
 			return null;
 		}
 }
+
+	public HairStyle getHairStyle() {
+		// TODO Auto-generated method stub
+		return this.hairStyle;
+	}
+
+	public Clothing getClothing() {
+		// TODO Auto-generated method stub
+		return this.clothing;
+	}

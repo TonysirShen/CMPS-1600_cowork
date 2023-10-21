@@ -70,9 +70,9 @@ public class ShortStory_main implements IStory{
 	private ActionSequence getInitSQ(){
 		var SQ = new ActionSequence();
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.jojo)));
-		SQ.add(new Create<Place>(home));
-		SQ.add(new Position(jojo, home));
-		SQ.add(SetCamera);
+		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
 		
 		return null;
 	}
