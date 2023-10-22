@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import com.actions.*;
 import com.entities.*;
 import com.entities.Character;
-import com.entities.IThing.PlaceNames;
+import com.entities.Character.Clothing;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
@@ -73,7 +73,145 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
 		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
-		
-		return null;
+		SQ.add(new ShowMenu(true));
+		return SQ;
 	}
+	private ActionSequence getStartSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new ShowMenu(false));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Nude));
+		SQ.add(new EnableInput(true));
+		return SQ;
+		}
+
+	//Gungeon main quest
+	private ActionSequence getCitySQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new Create<Place>(placeList.get(ThingNames.city)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
+	
+	private ActionSequence getCastleCrossRoadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetSwordSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getSword_CitySQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getSwordBlackSmithSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getTalktoBlacksmithSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetHelmet2SQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getSuccessSpookyRoadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getBanditSubmitSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getDungeonSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getFightWithWarlockSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getBlacksmithSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetHelmetSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetCitySQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetCrossroadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetGreatHallSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetGetSwordSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getFailSpookyRoadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getBanditWinSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGuardCampSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetSwordHelmetSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGameOVERSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGreatHallSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence geCityArresttSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getJailGameOverSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getStartJailQuestSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getClothGameOverSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getMerchantTalkSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getClothPortSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getReturnToCitySQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getPeasantClothingSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	
 }
