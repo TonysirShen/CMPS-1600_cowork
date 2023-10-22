@@ -19,7 +19,8 @@ public class ShortStory_Ian implements IStory{
 		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, SwordBlackSmith, TalktoBlacksmith2,
 		GetHelmet2, SuccessSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, GetHelmet, HelmetCity, 
 		HelmetCrossroad, HelmetGreatHall, HelmetGetSword, FailSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
-		GameOVER, GreatHall	
+		GameOVER, GreatHall, CityArrest, JailGameOver, StartJailQuest, ClothGameover, MerchantTalk, ClothPort,
+		ReturnToCity, PeasantClothing
 	}
 	
 	public ShortStory_Ian() {
@@ -54,31 +55,138 @@ public class ShortStory_Ian implements IStory{
 		
 		return null;
 	}
-	private ActionSequence getStartSQ() {return null;}
-	private ActionSequence getCitySQ() {return null;}
-	private ActionSequence getCottageSQ() {return null;}
-	private ActionSequence getCastleCrossRoadSQ() {return null;}
-	private ActionSequence getGetSwordSQ() {return null;}
-	private ActionSequence getSword_CitySQ() {return null;}
-	private ActionSequence getSwordBlackSmithSQ() {return null;}
-	private ActionSequence getTalktoBlacksmithSQ() {return null;}
-	private ActionSequence getGetHelmet2SQ() {return null;}
-	private ActionSequence getSuccessSpookyRoadSQ() {return null;}
-	private ActionSequence getBanditSubmitSQ() {return null;}
-	private ActionSequence getDungeonSQ() {return null;}
-	private ActionSequence getFightWithWarlockSQ() {return null;}
-	private ActionSequence getBlacksmithSQ() {return null;}
-	private ActionSequence getGetHelmetSQ() {return null;}
-	private ActionSequence getHelmetCitySQ() {return null;}
-	private ActionSequence getHelmetCrossroadSQ() {return null;}
-	private ActionSequence getHelmetGreatHallSQ() {return null;}
-	private ActionSequence getHelmetGetSwordSQ() {return null;}
-	private ActionSequence getFailSpookyRoadSQ() {return null;}
-	private ActionSequence getBanditWinSQ() {return null;}
-	private ActionSequence getGuardCampSQ() {return null;}
-	private ActionSequence getGetSwordHelmetSQ() {return null;}
-	private ActionSequence getGameOVERSQ() {return null;}
-	private ActionSequence getGreatHallSQ() {return null;}
+	private ActionSequence getStartSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getCitySQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getCottageSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getCastleCrossRoadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetSwordSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getSword_CitySQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getSwordBlackSmithSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getTalktoBlacksmithSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetHelmet2SQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getSuccessSpookyRoadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getBanditSubmitSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getDungeonSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getFightWithWarlockSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getBlacksmithSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetHelmetSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetCitySQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetCrossroadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetGreatHallSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getHelmetGetSwordSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getFailSpookyRoadSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getBanditWinSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGuardCampSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGetSwordHelmetSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGameOVERSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getGreatHallSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence geCityArresttSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getJailGameOverSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getStartJailQuestSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getClothGameOverSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getMerchantTalkSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getClothPortSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getReturnToCitySQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
+	private ActionSequence getPeasantClothingSQ() {
+		var SQ = new ActionSequence();
+		return SQ;
+	}
 	
 		
 }
