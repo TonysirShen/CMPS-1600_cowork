@@ -8,13 +8,12 @@ import java.util.Hashtable;
 import com.actions.*;
 import com.entities.*;
 import com.entities.Character;
-import com.entities.IThing.PlaceNames;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
 import com.sequences.CharacterCreation;
 
-public class ShortStory_main implements IStory{
+public class ShortStory_Ian implements IStory{
 	private Hashtable<ThingNames,Character> characterList = new Hashtable();
 	private Hashtable<ThingNames,Place> placeList = new Hashtable();
 	private Hashtable<ThingNames,Item> itemList = new Hashtable();
@@ -202,6 +201,7 @@ public class ShortStory_main implements IStory{
 	private ActionSequence geCityArresttSQ() {
 		var SQ = new ActionSequence();
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		
 		return SQ;
 	}
 	private ActionSequence getJailGameOverSQ() {

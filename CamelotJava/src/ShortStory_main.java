@@ -51,8 +51,8 @@ public class ShortStory_main implements IStory{
 		characterList.put(ThingNames.king,new Character(ThingNames.king));
 		characterList.put(ThingNames.bandit,new Character(ThingNames.bandit));
 		characterList.put(ThingNames.guard,new Character(ThingNames.guard));
-		characterList.put(ThingNames.warload,new Character(ThingNames.warload));
-		itemList.put(ThingNames.sowrd,new Item(ThingNames.sowrd,Items.Sword));
+		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
+		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
 		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.cottage));
@@ -80,7 +80,7 @@ public class ShortStory_main implements IStory{
 	private ActionSequence getStartSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new ShowMenu(false));
-		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Nude));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Naked));
 		SQ.add(new EnableInput(true));
 		return SQ;
 		}
