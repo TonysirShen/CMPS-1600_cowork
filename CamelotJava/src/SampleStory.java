@@ -93,6 +93,8 @@ public class SampleStory implements IStory{
 	
 	private ActionSequence getStartSequence() {
 		var sequence=new ActionSequence();
+		sequence.add(new ShowDialog());
+		
 		sequence.add(new ShowMenu(false));
 		sequence.add(new EnableInput(true));
 		return sequence;

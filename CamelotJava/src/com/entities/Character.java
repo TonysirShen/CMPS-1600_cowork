@@ -4,16 +4,16 @@ import com.entities.IThing.ThingNames;
 
 public class Character implements IEntity, IThing<Character.BodyTypes>{
 	private String name;
-	protected BodyTypes bodyType;
+	protected BodyTypes bodyType = BodyTypes.A;
 	public enum BodyTypes{A,B,C,D,E,F,G,H};
 	private Clothing clothing = Clothing.Peasant;
 	public enum Clothing{Bandit,Beggar,LightArmour,HeavyArmour,Merchant,Noble,Peasant,Priest, Naked};
 	private HairStyle hairStyle = HairStyle.Short;
-	public enum HairStyle{Long,Spiky,Short};
+	public enum HairStyle{Long,Spiky,Short,Short_Full,Ponytail_ACEG,Straight_aceg,Mage, Mage_Beard, Mage_Full    };
 	
-	//Constructor
+	//Constructors
 	public Character(String name) {
-	    this(name, null);
+	    this(name, BodyTypes.A);
 	}
 
 	public Character(String name, BodyTypes bodyType) {

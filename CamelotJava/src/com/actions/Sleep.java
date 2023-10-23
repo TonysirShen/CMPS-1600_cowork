@@ -19,7 +19,7 @@ public class Sleep implements IAction {
 	@Override
 	public boolean getShouldWait() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

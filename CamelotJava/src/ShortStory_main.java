@@ -9,6 +9,7 @@ import com.actions.*;
 import com.entities.*;
 import com.entities.Character;
 import com.entities.Character.Clothing;
+import com.entities.Character.HairStyle;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
@@ -71,8 +72,10 @@ public class ShortStory_main implements IStory{
 	private ActionSequence getInitSQ(){
 		var SQ = new ActionSequence();
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.jojo)));
+		SQ.add(new SetHairStyle(characterList.get(ThingNames.jojo),HairStyle.Long));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
+		SQ.add(new Sleep(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home).getFurniture("Bed")));
 		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
 		SQ.add(new ShowMenu(true));
 		return SQ;
@@ -80,11 +83,23 @@ public class ShortStory_main implements IStory{
 	private ActionSequence getStartSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new ShowMenu(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("It is morning, time to wake up!"));
+		SQ.add(new SetDialog("Lets put the cloth on"));
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Naked));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
 		SQ.add(new EnableInput(true));
 		return SQ;
 		}
-
+	private ActionSequence getPeasantClothingSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Peasant));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Lets go to the City"));
+		SQ.add(new ShowDialog(false));
+		return SQ;
+	}
 	//Gungeon main quest
 	private ActionSequence getCitySQ() {
 		var SQ = new ActionSequence();
@@ -210,9 +225,6 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		return SQ;
 	}
-	private ActionSequence getPeasantClothingSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
+	
 	
 }
