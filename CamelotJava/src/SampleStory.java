@@ -83,7 +83,7 @@ public class SampleStory implements IStory{
 		Place home = ((Place)Things.get(ThingNames.Home).get());
 		var sequence = new ActionSequence();
 		sequence.combineWith(new CharacterCreation(tom));
-		sequence.add(new Create<Place>(Things.get(ThingNames.Home)
+		sequence.add(new Create<Place>(Things.get(ThingNames.Home);
 		sequence.add(new Create<Item>(Things.get(ThingNames.Sword())));
 		sequence.add(new Position(sword, ((Place)Things.get(ThingNames.Home).get()), "Shelf"));
 		sequence.add(new SetCameraFocus(tom));
