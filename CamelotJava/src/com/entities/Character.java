@@ -7,7 +7,7 @@ public class Character implements IEntity, IThing<Character.BodyTypes>{
 	protected BodyTypes bodyType = BodyTypes.A;
 	public enum BodyTypes{A,B,C,D,E,F,G,H};
 	private Clothing clothing = Clothing.Peasant;
-	public enum Clothing{Bandit,Beggar,LightArmour,HeavyArmour,Merchant,Noble,Peasant,Priest, Naked};
+	public enum Clothing{Bandit,Beggar,LightArmour,HeavyArmour,Merchant,Noble,Peasant,Priest, Naked, King};
 	private HairStyle hairStyle = HairStyle.Short;
 	public enum HairStyle{Long,Spiky,Short,Short_Full,Ponytail_ACEG,Straight_aceg,Mage, Mage_Beard, Mage_Full    };
 	

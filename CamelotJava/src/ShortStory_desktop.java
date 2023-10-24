@@ -92,10 +92,20 @@ public class ShortStory_desktop implements IStory{
 		SQ.add(new EnableInput(true));
 		return SQ;
 		}
-
+	private ActionSequence getPeasantClothingSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Peasant));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Lets go to the City"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
 	//Gungeon main quest
 	private ActionSequence getCitySQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.city)));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
 		SQ.add(new EnableInput(true));
@@ -218,9 +228,6 @@ public class ShortStory_desktop implements IStory{
 		var SQ = new ActionSequence();
 		return SQ;
 	}
-	private ActionSequence getPeasantClothingSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
+	
 	
 }
