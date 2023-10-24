@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import com.actions.*;
 import com.entities.*;
 import com.entities.Character;
+import com.entities.Character.BodyTypes;
 import com.entities.Character.Clothing;
 import com.entities.Character.HairStyle;
 import com.entities.IThing.ThingNames;
@@ -49,7 +50,7 @@ public class ShortStory_desktop implements IStory{
 		
 		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo));
 		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
-		characterList.put(ThingNames.king,new Character(ThingNames.king));
+		characterList.put(ThingNames.king,new Character(ThingNames.king.toString(),BodyTypes.H,Clothing.King));
 		characterList.put(ThingNames.bandit,new Character(ThingNames.bandit));
 		characterList.put(ThingNames.guard,new Character(ThingNames.guard));
 		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
@@ -114,10 +115,24 @@ public class ShortStory_desktop implements IStory{
 	
 	private ActionSequence getCastleCrossRoadSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.castlecrossroad)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Lets go to the City"));
+		SQ.add(new ShowDialog(false));
 		return SQ;
 	}
 	private ActionSequence getGetSwordSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
+		SQ.add(new Position(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall)));
+		SQ.add(new Sit(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall).getFurniture("Throne")));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.GreatHall),"Gate"));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.king)));
 		return SQ;
 	}
 	private ActionSequence getSword_CitySQ() {
