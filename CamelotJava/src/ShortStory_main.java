@@ -13,6 +13,7 @@ import com.entities.Character.HairStyle;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
+import com.playerInput.*;
 import com.sequences.CharacterCreation;
 
 public class ShortStory_main implements IStory{
@@ -40,6 +41,8 @@ public class ShortStory_main implements IStory{
 
 	@Override
 	public INode getRoot() {
+		var root = new Node("Init");
+		root.addChild(new SelectionChoice("Start"), getRoot());
 		
 		return new Node("root");
 	}
@@ -56,6 +59,7 @@ public class ShortStory_main implements IStory{
 		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
+		itemList.put(ThingNames.Bluecloth, new Item(ThingNames.Bluecloth,Items.BlueCloth));
 		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.cottage));
 		placeList.put(ThingNames.city, new Place(ThingNames.city,Places.city));
 		placeList.put(ThingNames.camp, new Place(ThingNames.camp,Places.camp));
@@ -71,13 +75,38 @@ public class ShortStory_main implements IStory{
 	//Action Sequence
 	private ActionSequence getInitSQ(){
 		var SQ = new ActionSequence();
+		//Character Creation
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.blacksmith)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.warlock)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.merchant)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.beggar)));
+		
+		//Place Creation
+		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.blacksmith)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.Spookypath)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.Dungeon)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.GreatHall)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.camp)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.Port)));
+		
+		//Items Creation
+		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.helmet)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.Greenpotion)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.Bluecloth)));
+		
+		
+		
+		//Original
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.jojo)));
-		SQ.add(new SetHairStyle(characterList.get(ThingNames.jojo),HairStyle.Long));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
-		SQ.add(new Sleep(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home).getFurniture("Bed")));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
 		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
-		SQ.add(new ShowMenu(true));
+		
 		return SQ;
 	}
 	private ActionSequence getStartSQ() {
@@ -197,6 +226,8 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		return SQ;
 	}
+	
+	
 	private ActionSequence geCityArresttSQ() {
 		var SQ = new ActionSequence();
 		return SQ;
