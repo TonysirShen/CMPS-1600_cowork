@@ -70,6 +70,33 @@ public class ShortStory_Ian implements IStory{
 	//Action Sequence
 	private ActionSequence getInitSQ(){
 		var SQ = new ActionSequence();
+		//Character Creation
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.blacksmith)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.warlock)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.merchant)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.beggar)));
+		
+		//Place Creation
+		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.blacksmith)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.Spookypath)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.Dungeon)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.GreatHall)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.camp)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.Port)));
+		
+		//Items Creation
+		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.helmet)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.Greenpotion)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.Bluecloth)));
+		
+		
+		
+		//Original
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.jojo)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
@@ -92,8 +119,7 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getCastleCrossRoadSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		
 		return SQ;
 	}
 	private ActionSequence getGetSwordSQ() {
@@ -106,8 +132,6 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getSwordBlackSmithSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.blacksmith)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.blacksmith)));
 		return SQ;
 	}
 	private ActionSequence getTalktoBlacksmithSQ() {
@@ -120,8 +144,7 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getSuccessSpookyRoadSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Spookypath)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit)));
+		
 		return SQ;
 	}
 	private ActionSequence getBanditSubmitSQ() {
@@ -130,8 +153,7 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getDungeonSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Dungeon)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.warlock)));
+		
 		return SQ;
 	}
 	private ActionSequence getFightWithWarlockSQ() {
@@ -140,8 +162,7 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getBlacksmithSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.blacksmith)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.blacksmith)));
+		
 		return SQ;
 	}
 	private ActionSequence getGetHelmetSQ() {
@@ -154,14 +175,12 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getHelmetCrossroadSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		
 		return SQ;
 	}
 	private ActionSequence getHelmetGreatHallSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.GreatHall)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
+		
 		return SQ;
 	}
 	private ActionSequence getHelmetGetSwordSQ() {
@@ -170,8 +189,6 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getFailSpookyRoadSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Spookypath)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit)));
 		return SQ;
 	}
 	private ActionSequence getBanditWinSQ() {
@@ -180,8 +197,7 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getGuardCampSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.camp)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		
 		return SQ;
 	}
 	private ActionSequence getGetSwordHelmetSQ() {
@@ -194,14 +210,11 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getGreatHallSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.GreatHall)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
+		
 		return SQ;
 	}
 	private ActionSequence geCityArresttSQ() {
 		var SQ = new ActionSequence();
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
-		
 		return SQ;
 	}
 	private ActionSequence getJailGameOverSQ() {
@@ -210,10 +223,6 @@ public class ShortStory_Ian implements IStory{
 	}
 	private ActionSequence getStartJailQuestSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Port)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.merchant)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.beggar)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
 		return SQ;
 	}
 	private ActionSequence getClothGameOverSQ() {
