@@ -60,13 +60,13 @@ public class ShortStory_main implements IStory{
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
 		itemList.put(ThingNames.Bluecloth, new Item(ThingNames.Bluecloth,Items.BlueCloth));
-		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.cottage));
-		placeList.put(ThingNames.city, new Place(ThingNames.city,Places.city));
-		placeList.put(ThingNames.camp, new Place(ThingNames.camp,Places.camp));
-		placeList.put(ThingNames.castlecrossroad, new Place(ThingNames.castlecrossroad,Places.castlecrossroad));
-		placeList.put(ThingNames.Spookypath, new Place(ThingNames.Spookypath,Places.Spookypath));
+		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.Cottage));
+		placeList.put(ThingNames.city, new Place(ThingNames.city,Places.City));
+		placeList.put(ThingNames.camp, new Place(ThingNames.camp,Places.Camp));
+		placeList.put(ThingNames.castlecrossroad, new Place(ThingNames.castlecrossroad,Places.CastleCrossroads));
+		placeList.put(ThingNames.Spookypath, new Place(ThingNames.Spookypath,Places.SpookyPath));
 		placeList.put(ThingNames.GreatHall, new Place(ThingNames.GreatHall,Places.GreatHall));
-		placeList.put(ThingNames.Dungeon, new Place(ThingNames.Dungeon,Places.Dungeon));
+		placeList.put(ThingNames.jail, new Place(ThingNames.jail,Places.Dungeon));
 		
 		
 		// TODO Auto-generated method stub
@@ -88,10 +88,12 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.blacksmith)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.Spookypath)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Dungeon)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.jail)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.GreatHall)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.camp)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.Port)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.Ruins)));
+		
 		
 		//Items Creation
 		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));

@@ -68,151 +68,7 @@ public class ShortStory_Ian implements IStory{
 	}
 
 	//Action Sequence
-	private ActionSequence getInitSQ(){
-		var SQ = new ActionSequence();
-		//Character Creation
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.blacksmith)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.warlock)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.merchant)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.beggar)));
-		
-		//Place Creation
-		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.blacksmith)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Spookypath)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Dungeon)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.GreatHall)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.camp)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.Port)));
-		
-		//Items Creation
-		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
-		SQ.add(new Create<Item>(itemList.get(ThingNames.helmet)));
-		SQ.add(new Create<Item>(itemList.get(ThingNames.Greenpotion)));
-		SQ.add(new Create<Item>(itemList.get(ThingNames.Bluecloth)));
-		
-		
-		
-		//Original
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.jojo)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
-		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
-		
-		return null;
-	}
-
-	private ActionSequence getStartSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getCitySQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getCottageSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getCastleCrossRoadSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
-	private ActionSequence getGetSwordSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getSword_CitySQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getSwordBlackSmithSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getTalktoBlacksmithSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getGetHelmet2SQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getSuccessSpookyRoadSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
-	private ActionSequence getBanditSubmitSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getDungeonSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
-	private ActionSequence getFightWithWarlockSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getBlacksmithSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
-	private ActionSequence getGetHelmetSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getHelmetCitySQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getHelmetCrossroadSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
-	private ActionSequence getHelmetGreatHallSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
-	private ActionSequence getHelmetGetSwordSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getFailSpookyRoadSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getBanditWinSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getGuardCampSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
-	private ActionSequence getGetSwordHelmetSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getGameOVERSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
-	private ActionSequence getGreatHallSQ() {
-		var SQ = new ActionSequence();
-		
-		return SQ;
-	}
+	
 	private ActionSequence geCityArresttSQ() {
 		var SQ = new ActionSequence();
 		return SQ;
@@ -242,10 +98,9 @@ public class ShortStory_Ian implements IStory{
 		var SQ = new ActionSequence();
 		return SQ;
 	}
-	private ActionSequence getPeasantClothingSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
+}
+
+	
+
 	
 		
-}
