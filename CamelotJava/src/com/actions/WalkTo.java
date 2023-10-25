@@ -25,7 +25,7 @@ public class WalkTo implements IAction {
 	}
 	@Override
 	public String toString() {
-		return String.format("%s(%s,%s)", getName(),character.getName(),other q.getName());
+		return String.format("%s(%s,%s)", getName(),character.getName(),other.getName());
 	}
 
 }
