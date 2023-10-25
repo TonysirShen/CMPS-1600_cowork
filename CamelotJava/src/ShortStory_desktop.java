@@ -121,18 +121,26 @@ public class ShortStory_desktop implements IStory{
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
 		SQ.add(new FadeOut(false));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("Lets go to the City"));
+		SQ.add(new SetDialog("Lets go to meet the King"));
 		SQ.add(new ShowDialog(false));
 		return SQ;
 	}
 	private ActionSequence getGetSwordSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
-		SQ.add(new Position(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
+		SQ.add(new Position(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall),"Throne"));
 		SQ.add(new Sit(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall).getFurniture("Throne")));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.GreatHall),"Gate"));
+		SQ.add(new Position(itemList.get(ThingNames.sword),placeList.get(ThingNames.GreatHall),"Table"));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.GreatHall),"Gate"));	
+		SQ.add(new FadeOut(false));
 		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.king)));
+		SQ.add(new SetDialog("My worrier you are here, you can take the sword."));
+		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
+		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getSword_CitySQ() {
