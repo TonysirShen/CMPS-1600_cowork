@@ -86,7 +86,7 @@ public class ShortStory_desktop implements IStory{
 		SQ.add(new ShowMenu(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("It is morning, time to wake up!"));
-		SQ.add(new SetDialog("Lets put the cloth on"));
+		SQ.add(new SetDialog("Lets put the clothes on"));
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Naked));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
@@ -137,7 +137,7 @@ public class ShortStory_desktop implements IStory{
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.GreatHall),"Gate"));	
 		SQ.add(new FadeOut(false));
 		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.king)));
-		SQ.add(new SetDialog("My worrier you are here, you can take the sword."));
+		SQ.add(new SetDialog("My warrior you are here, you can take the sword."));
 		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
 		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
 		SQ.add(new EnableInput(true));
