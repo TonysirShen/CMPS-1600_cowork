@@ -1,11 +1,11 @@
 package com.entities;
 
-import com.entities.Things.ThingNames;
+import com.entities.IThing.ThingNames;
 
 public class Item implements IEntity, IThing<Item.Items>{
 	private String name;
 	private Items template;
-	public enum Items{SpellBook,Sword,Torch,Scroll,LitTorch,Helmet, GreenPotion}
+	public enum Items{SpellBook,Sword,Torch,Scroll,LitTorch,Helmet, GreenPotion, BlueCloth}
 	// constructor
 	public Item(){}
 	public Item(String name, Items input) {
