@@ -1,11 +1,11 @@
 package com.entities;
 
-import com.entities.Things.ThingNames;
+import com.entities.IThing.ThingNames;
 
 public class Place implements IThing<Place.Places> {
 	private String place_name;
 	private Places template; 
-	public enum Places {cottage,city,camp,castlecrossroad,GreatHall,Spookypath,Dungeon};
+	public enum Places {Cottage,City,Camp,CastleCrossroads,GreatHall,SpookyPath,Dungeon,Ruins,Port};
 	
 	public Place(ThingNames name, Places template) {
 		this.place_name = name.toString();
