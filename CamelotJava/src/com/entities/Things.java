@@ -4,6 +4,8 @@ import java.util.Hashtable;
 
 import java.util.Optional;
 
+import com.entities.IThing.ThingNames;
+
 public class Things {
 	private static Hashtable<ThingNames, IThing<?>> list=new Hashtable<>();
 	public static boolean add(ThingNames name, IThing<?> thing) {
