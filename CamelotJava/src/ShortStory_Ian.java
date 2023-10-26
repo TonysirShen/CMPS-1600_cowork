@@ -120,7 +120,7 @@ public class ShortStory_Ian implements IStory{
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
-	private ActionSequence getClothGameOverSQ() {
+	private ActionSequence getClothGameOverStealSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth)));
@@ -128,6 +128,21 @@ public class ShortStory_Ian implements IStory{
 		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.beggar)));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Did you pay for those clothes? I don't think so."
+				+ "You are going back to jail for a long time."));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("GAME OVER"));
+		SQ.add(new ShowDialog(false));
+		return SQ;
+	}
+	private ActionSequence getClothGameOverLeaveSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth)));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.beggar)));
+		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.beggar)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Where do you think you are going. Are you trying to escape."
 				+ "You are going back to jail for a long time."));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
@@ -149,14 +164,38 @@ public class ShortStory_Ian implements IStory{
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Give(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Coin),characterList.get(ThingNames.merchant)));
 		SQ.add(new Give(characterList.get(ThingNames.merchant),itemList.get(ThingNames.Bluecloth),characterList.get(ThingNames.jojo)));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getClothPortSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.beggar)));
+		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.beggar)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Here you go. Enjoy."));//Jojo
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Thank you so much."));//beggar
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("You did a good thing. You are free to go."));//guard
+		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getReturnToCitySQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city),"EastEnd"));
+		SQ.add(new Position(characterList.get(ThingNames.guard),placeList.get(ThingNames.city),"EastEnd"));
+		SQ.add(new FadeOut(true));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Don't screw up again. I won't be as nice next time."));//guard
+		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(false));
+		
 		return SQ;
 	}
 }
