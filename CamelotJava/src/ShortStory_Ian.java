@@ -139,8 +139,7 @@ public class ShortStory_Ian implements IStory{
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth)));
-		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.beggar)));
-		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.beggar)));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.guard)));//might need to change walk
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Where do you think you are going. Are you trying to escape."
 				+ "You are going back to jail for a long time."));
