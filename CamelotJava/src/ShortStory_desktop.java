@@ -57,14 +57,16 @@ public class ShortStory_desktop implements IStory{
 		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
-		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.cottage));
-		placeList.put(ThingNames.city, new Place(ThingNames.city,Places.city));
-		placeList.put(ThingNames.camp, new Place(ThingNames.camp,Places.camp));
+		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.Cottage));
+		placeList.put(ThingNames.city, new Place(ThingNames.city,Places.City));
+		placeList.put(ThingNames.camp, new Place(ThingNames.camp,Places.Camp));
 		placeList.put(ThingNames.castlecrossroad, new Place(ThingNames.castlecrossroad,Places.castlecrossroad));
-		placeList.put(ThingNames.Spookypath, new Place(ThingNames.Spookypath,Places.Spookypath));
+		placeList.put(ThingNames.Spookypath, new Place(ThingNames.Spookypath,Places.SpookyPath));
 		placeList.put(ThingNames.GreatHall, new Place(ThingNames.GreatHall,Places.GreatHall));
-		placeList.put(ThingNames.Dungeon, new Place(ThingNames.Dungeon,Places.Dungeon));
-		
+		placeList.put(ThingNames.jail, new Place(ThingNames.jail,Places.Dungeon));
+		//fixer//
+		placeList.put(ThingNames.BShouse, new Place(ThingNames.BShouse,Places.Blacksmith));
+		//
 		
 		// TODO Auto-generated method stub
 	}
@@ -72,6 +74,9 @@ public class ShortStory_desktop implements IStory{
 	//Action Sequence
 	private ActionSequence getInitSQ(){
 		var SQ = new ActionSequence();
+		//fixer
+		SQ.add(new Create<Place>(placeList.get(ThingNames.BShouse)));
+		//
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.jojo)));
 		SQ.add(new SetHairStyle(characterList.get(ThingNames.jojo),HairStyle.Long));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
@@ -145,18 +150,42 @@ public class ShortStory_desktop implements IStory{
 	}
 	private ActionSequence getSword_CitySQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getSwordBlackSmithSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.blacksmith),"Door"));
+		SQ.add(new Position(itemList.get(ThingNames.helmet),placeList.get(ThingNames.blacksmith),"Anvii"));
+		SQ.add(new FadeOut(false));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
-	private ActionSequence getTalktoBlacksmithSQ() {
+	private ActionSequence getTalktoBlacksmithSQ2() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Looks like you get the sword from the king, now take the helmet, you can be the hero to defeat the warlock!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet) ));
+		SQ.add(new Give(characterList.get(ThingNames.blacksmith), itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Now Worrior, Take you way to success!!!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getGetHelmet2SQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new SetDialog("My warrior you are here, you can take the helmet."));
+		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet)));
 		return SQ;
 	}
 	private ActionSequence getSuccessSpookyRoadSQ() {
