@@ -1,14 +1,21 @@
 package com.actions;
 
 import com.entities.Character;
+import com.entities.Furniture;
 
 public class WalkTo implements IAction {
 	private Character character;
 	private Character other;
-
+	private Furniture furniture;
 	public WalkTo(Character character, Character other) {
 		this.character = character;
 		this.other = other;
+		// TODO Auto-generated constructor stub
+	}
+
+	public WalkTo(Character character2, Furniture furniture) {
+		this.character = character;
+		this.furniture = furniture;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -25,7 +32,12 @@ public class WalkTo implements IAction {
 	}
 	@Override
 	public String toString() {
-		return String.format("%s(%s,%s)", getName(),character.getName(),other.getName());
+		if(furniture == null) {
+			return String.format("%s(%s,%s)", getName(),character.getName(),other.getName());
+		}
+		else {
+			return String.format("%s(%s,%s)", getName(),character.getName(),furniture.getName());
+		}
 	}
 
 }
