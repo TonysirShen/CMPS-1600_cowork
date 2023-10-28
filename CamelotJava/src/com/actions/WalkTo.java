@@ -13,7 +13,7 @@ public class WalkTo implements IAction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WalkTo(Character character2, Furniture furniture) {
+	public WalkTo(Character character, Furniture furniture) {
 		this.character = character;
 		this.furniture = furniture;
 		// TODO Auto-generated constructor stub
