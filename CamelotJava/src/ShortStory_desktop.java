@@ -24,7 +24,7 @@ public class ShortStory_desktop implements IStory{
 	private enum ActionNames{};
 	private enum NodeLabels{
 		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
-		gethelmet2, successSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
+		gethelmet2, successSpookyRoad, BanditSubmit, Ruin, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
 		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
 		GameOVER, GreatHall	
 	}
@@ -51,21 +51,27 @@ public class ShortStory_desktop implements IStory{
 		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo));
 		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
 		characterList.put(ThingNames.king,new Character(ThingNames.king.toString(),BodyTypes.H,Clothing.King));
-		characterList.put(ThingNames.bandit,new Character(ThingNames.bandit));
+		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1));
 		characterList.put(ThingNames.guard,new Character(ThingNames.guard));
 		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
 		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
+		itemList.put(ThingNames.Hammer1,new Item(ThingNames.Hammer1,Items.Hammer));
+		itemList.put(ThingNames.Hammer2,new Item(ThingNames.Hammer2,Items.Hammer));
+		itemList.put(ThingNames.Hammer3,new Item(ThingNames.Hammer3,Items.Hammer));
 		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.Cottage));
 		placeList.put(ThingNames.city, new Place(ThingNames.city,Places.City));
 		placeList.put(ThingNames.camp, new Place(ThingNames.camp,Places.Camp));
-		placeList.put(ThingNames.castlecrossroad, new Place(ThingNames.castlecrossroad,Places.castlecrossroad));
+		placeList.put(ThingNames.castlecrossroad, new Place(ThingNames.castlecrossroad,Places.CastleCrossroads));
 		placeList.put(ThingNames.Spookypath, new Place(ThingNames.Spookypath,Places.SpookyPath));
 		placeList.put(ThingNames.GreatHall, new Place(ThingNames.GreatHall,Places.GreatHall));
 		placeList.put(ThingNames.jail, new Place(ThingNames.jail,Places.Dungeon));
 		//fixer//
 		placeList.put(ThingNames.BShouse, new Place(ThingNames.BShouse,Places.Blacksmith));
+		characterList.put(ThingNames.bandit2,new Character(ThingNames.bandit2));
+		characterList.put(ThingNames.bandit3,new Character(ThingNames.bandit3));
+		itemList.put(ThingNames.EvilBook, new Item(ThingNames.EvilBook,Items.EvilBook));
 		//
 		
 		// TODO Auto-generated method stub
@@ -76,6 +82,12 @@ public class ShortStory_desktop implements IStory{
 		var SQ = new ActionSequence();
 		//fixer
 		SQ.add(new Create<Place>(placeList.get(ThingNames.BShouse)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit1)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit2)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit3)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.Hammer1)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.Hammer2)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.Hammer3)));
 		//
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.jojo)));
 		SQ.add(new SetHairStyle(characterList.get(ThingNames.jojo),HairStyle.Long));
@@ -183,25 +195,66 @@ public class ShortStory_desktop implements IStory{
 	}
 	private ActionSequence getGetHelmet2SQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new ShowDialog(true));
 		SQ.add(new EnableInput(false));
+		SQ.add(new ShowDialog(false));
 		SQ.add(new SetDialog("My warrior you are here, you can take the helmet."));
 		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet)));
+		SQ.add(new Give(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmor));
+		SQ.add(new EnableInput(true));;
 		return SQ;
 	}
 	private ActionSequence getSuccessSpookyRoadSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.Spookypath),"WestEnd"));
+		SQ.add(new Position(characterList.get(ThingNames.bandit1),placeList.get(ThingNames.Spookypath),"WestEnd"));
+		SQ.add(new Position(characterList.get(ThingNames.bandit2),placeList.get(ThingNames.Spookypath),"WestEnd"));
+		SQ.add(new Position(characterList.get(ThingNames.bandit3),placeList.get(ThingNames.Spookypath),"WestEnd"));
+		SQ.add(new Position(itemList.get(ThingNames.Hammer1),characterList.get(ThingNames.bandit1)));
+		SQ.add(new Position(itemList.get(ThingNames.Hammer2),characterList.get(ThingNames.bandit2)));
+		SQ.add(new Position(itemList.get(ThingNames.Hammer3),characterList.get(ThingNames.bandit3)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Looks there are some bandit blocking my way"));
+		SQ.add(new SetDialog("Time To test my gears"));
+		SQ.add(new ShowDialog(false));;
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getBanditSubmitSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("What? why the superme guard can found us?"));
+		SQ.add(new SetDialog("Retreat! We need to tell the warlock about this!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Pocket(characterList.get(ThingNames.bandit1),itemList.get(ThingNames.Hammer1)));
+		SQ.add(new WalkTo(characterList.get(ThingNames.bandit1),placeList.get(ThingNames.Spookypath).getFurniture("EastEnd")));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
-	private ActionSequence getDungeonSQ() {
+	private ActionSequence getRuinSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.Ruins),"Exit"));
+		SQ.add(new Position(characterList.get(ThingNames.warlock),placeList.get(ThingNames.Ruins),"Throne"));
+		SQ.add(new Position(itemList.get(ThingNames.EvilBook),placeList.get(ThingNames.Ruins),"Altar"));
+		SQ.add(new Sit(characterList.get(ThingNames.warlock),placeList.get(ThingNames.Ruins).getFurniture("Throne")));
+		SQ.add(new FadeOut(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("A sense of evil surrending you"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getFightWithWarlockSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new WalkTo(characterList.get(ThingNames.warlock),placeList.get(ThingNames.Ruins).getFurniture("Altar")));
+		
 		return SQ;
 	}
 	private ActionSequence getBlacksmithSQ() {
