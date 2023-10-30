@@ -14,7 +14,7 @@ public class ShowDialog implements IAction {
 	 */
 	@Override
 	public String getName() {
-		return show? "ShowMenu":"HideMenu";
+		return show? "ShowDialog":"HideDialog";
 	}
 	/**
 	 * @return true
