@@ -72,11 +72,17 @@ public class ShortStory_Ian implements IStory{
 
 	//Action Sequence
 	//Right Side
+	//position
 	private ActionSequence getBlacksmithSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.BShouse),"Door"));
+		SQ.add(new Position(characterList.get(ThingNames.blacksmith),placeList.get(ThingNames.BShouse),"Anvil"));
+		SQ.add(new Position(itemList.get(ThingNames.helmet),placeList.get(ThingNames.BShouse),"Anvil"));
+		SQ.add(new FadeOut(false));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("You are looking pretty unprepared. I think I can help you out. Here take my helmet, so you can defeat the warlock."));
+		SQ.add(new SetDialog("You are looking pretty unprepared. I think I can help you out. \n Here take my helmet, so you can defeat the warlock."));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet) ));
 		SQ.add(new Give(characterList.get(ThingNames.blacksmith), itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
@@ -112,17 +118,15 @@ public class ShortStory_Ian implements IStory{
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
+	
 	private ActionSequence gethelmetCrossroadSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new FadeOut(true));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.castlecrossroad)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
 		SQ.add(new FadeOut(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Lets go meet the King and grab the sword. Then we can fight the warlock."));
 		SQ.add(new ShowDialog(false));
-		return SQ;
 		return SQ;
 	}
 	private ActionSequence gethelmetGreatHallSQ() {
