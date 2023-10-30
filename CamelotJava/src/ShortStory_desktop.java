@@ -188,7 +188,7 @@ public class ShortStory_desktop implements IStory{
 		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet) ));
 		SQ.add(new Give(characterList.get(ThingNames.blacksmith), itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("Now Worrior, Take you way to success!!!"));
+		SQ.add(new SetDialog("Now Warrior, Take you way to success!!!"));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new EnableInput(true));
 		return SQ;

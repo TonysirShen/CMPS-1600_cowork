@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import com.actions.*;
 import com.entities.*;
 import com.entities.Character;
+import com.entities.Character.Clothing;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
@@ -48,7 +49,7 @@ public class ShortStory_Ian implements IStory{
 		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo));
 		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
 		characterList.put(ThingNames.king,new Character(ThingNames.king));
-		characterList.put(ThingNames.bandit,new Character(ThingNames.bandit));
+		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1));
 		characterList.put(ThingNames.guard,new Character(ThingNames.guard));
 		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
 		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
@@ -70,8 +71,88 @@ public class ShortStory_Ian implements IStory{
 	}
 
 	//Action Sequence
+	//Right Side
+	private ActionSequence getBlacksmithSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("You are looking pretty unprepared. I think I can help you out. Here take my helmet, so you can defeat the warlock."));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet) ));
+		SQ.add(new Give(characterList.get(ThingNames.blacksmith), itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Now go. Defeat the warlock."));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
 	
-	private ActionSequence geCityArresttSQ() {
+	private ActionSequence getgetHelmetSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new ShowDialog(true));
+		SQ.add(new EnableInput(false));
+		SQ.add(new SetDialog("My warrior, you can take the helmet."));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("You are almost ready. All you need is a proper weapon."));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet)));
+		SQ.add(new Give(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmor));
+		SQ.add(new EnableInput(true));;
+		return SQ;
+	}
+	private ActionSequence gethelmetCitySQ() {
+		var SQ = new ActionSequence();
+		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
+	private ActionSequence gethelmetCrossroadSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.castlecrossroad)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Lets go meet the King and grab the sword. Then we can fight the warlock."));
+		SQ.add(new ShowDialog(false));
+		return SQ;
+		return SQ;
+	}
+	private ActionSequence gethelmetGreatHallSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new EnableInput(false));
+		SQ.add(new FadeOut(true));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
+		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
+		SQ.add(new Position(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall),"Throne"));
+		SQ.add(new Sit(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall).getFurniture("Throne")));
+		SQ.add(new Position(itemList.get(ThingNames.sword),placeList.get(ThingNames.GreatHall),"Table"));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.GreatHall),"Gate"));	
+		SQ.add(new FadeOut(false));
+		return SQ;
+	}
+	private ActionSequence gethelmetGetSwordSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.king)));
+		SQ.add(new SetDialog("Here is my sword warrior. Use it to defeat the evil warlock. You are ready."));
+		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
+		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
+	
+	
+	//SIDE QUEST
+	
+	
+	private ActionSequence getCityArresttSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
