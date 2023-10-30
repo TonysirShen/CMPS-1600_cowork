@@ -24,7 +24,7 @@ public class ShortStory_Ian implements IStory{
 		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
 		gethelmet2, successSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
 		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
-		GameOVER, GreatHall	
+		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort, ReturnToCity	
 	}
 	
 	public void ShortStory_main() {
@@ -39,8 +39,39 @@ public class ShortStory_Ian implements IStory{
 
 	@Override
 	public INode getRoot() {
+		var jailgameover = new Node(NodeLabels.JailGameOver.toString());
+		var startjailquest = new Node(NodeLabels.StartJailQuest.toString());
+		var clothgameoverleave = new Node(NodeLabels.ClothGameOverLeave.toString());
+		var clothgameoversteal = new Node(NodeLabels.ClothGameOverSteal.toString());
+		var merchanttalk = new Node(NodeLabels.MerchantTalk.toString());
+		var clothport = new Node(NodeLabels.ClothPort.toString());
+		var returntocity = new Node(NodeLabels.ReturnToCity.toString());
+		var castlecrossroad = new Node(NodeLabels.CastleCrossRoad.toString());
+		var greathall = new Node(NodeLabels.GreatHall.toString());
+		var getsword = new Node(NodeLabels.Getsword.toString());
+		var swordcity = new Node(NodeLabels.Sword_city.toString());
+		var swordblacksmith = new Node(NodeLabels.swordBlackSmith.toString());
+		var talktoblacksmith2 = new Node(NodeLabels.TalktoBlacksmith2.toString());
+		var gethelmet2 = new Node(NodeLabels.gethelmet2.toString());
+		var successspookyroad = new Node(NodeLabels.successSpookyRoad.toString());
+		var banditsubmit = new Node(NodeLabels.BanditSubmit.toString());
+		var dungeon = new Node(NodeLabels.Dungeon.toString());
+		var fightwithwarlock = new Node(NodeLabels.FightWithWarlock.toString());
+		var blacksmith = new Node(NodeLabels.Blacksmith.toString());
+		var gethelmet = new Node(NodeLabels.getHelmet.toString());
+		var helmetcity = new Node(NodeLabels.helmetCity.toString());
+		var helmetcrossroad = new Node(NodeLabels.helmetCrossroad.toString());
+		var helmetgreathall = new Node(NodeLabels.helmetGreatHall.toString());
+		var helmetgetsword = new Node(NodeLabels.helmetGetSword.toString());
+		var failspookyroad = new Node(NodeLabels.failSpookyRoad.toString());
+		var banditwin = new Node(NodeLabels.BanditWin.toString());
+		var guardcamp = new Node(NodeLabels.GuardCamp.toString());
+		var getswordhelmet = new Node(NodeLabels.GetSwordHelmet.toString());
+		var gameover = new Node(NodeLabels.GameOVER.toString());
+		
 		
 		return new Node("root");
+		
 	}
 
 	@Override
@@ -69,10 +100,10 @@ public class ShortStory_Ian implements IStory{
 		
 		// TODO Auto-generated method stub
 	}
-
+	
 	//Action Sequence
 	//Right Side
-	//position
+	
 	private ActionSequence getBlacksmithSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
@@ -109,7 +140,6 @@ public class ShortStory_Ian implements IStory{
 		return SQ;
 	}
 	private ActionSequence gethelmetCitySQ() {
-		var SQ = new ActionSequence();
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
