@@ -48,7 +48,7 @@ public class ShortStory_desktop implements IStory{
 	@Override
 	public void getThings() {
 		
-		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo));
+		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo.toString(),BodyTypes.H));
 		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
 		characterList.put(ThingNames.king,new Character(ThingNames.king.toString(),BodyTypes.H,Clothing.King));
 		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1));
@@ -246,15 +246,55 @@ public class ShortStory_desktop implements IStory{
 		SQ.add(new Sit(characterList.get(ThingNames.warlock),placeList.get(ThingNames.Ruins).getFurniture("Throne")));
 		SQ.add(new FadeOut(false));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("A sense of evil surrending you"));
+		SQ.add(new SetDialog("A sense of evil surrending you /n It looks like the feeling comes from the book on the desk."));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getFightWithWarlockSQ() {
 		var SQ = new ActionSequence();
+		SQ.add(new Position(itemList.get(ThingNames.Hammer1),characterList.get(ThingNames.warlock)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("You think you can steal my magic from me?"));
+		SQ.add(new ShowDialog(false));
 		SQ.add(new WalkTo(characterList.get(ThingNames.warlock),placeList.get(ThingNames.Ruins).getFurniture("Altar")));
-		
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Now take this!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Cast(characterList.get(ThingNames.warlock),characterList.get(ThingNames.jojo)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("I need to fight back"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Attack(characterList.get(ThingNames.jojo),characterList.get(ThingNames.warlock),false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("You are too weak to defeat me!!!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Cast(characterList.get(ThingNames.warlock),characterList.get(ThingNames.jojo)));
+		SQ.add(new Attack(characterList.get(ThingNames.jojo),characterList.get(ThingNames.warlock),true));
+		SQ.add(new Die(characterList.get(ThingNames.warlock)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("I defeat Him!\n Lets go back to the castle to get our reward"));
+		SQ.add(new ShowDialog(false));
+		return SQ;
+	}
+	private ActionSequence getGreatHallRewardSQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.GreatHall)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("My Worrior, you finish my ultimate quest. This proves you are a great one, take this 100 coins as you reward!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("I sacriface my life for coins?"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Attack(characterList.get(ThingNames.jojo),characterList.get(ThingNames.king),true));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Now I will be the King!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.King));
+		SQ.add(new Sit(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall).getFurniture("Throne")));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("So you become a powerful ruler of the kingdom. /n Wonderful Ending .....?"));
+		SQ.add(new ShowDialog(false));
 		return SQ;
 	}
 	private ActionSequence getBlacksmithSQ() {
@@ -301,10 +341,7 @@ public class ShortStory_desktop implements IStory{
 		var SQ = new ActionSequence();
 		return SQ;
 	}
-	private ActionSequence getGreatHallSQ() {
-		var SQ = new ActionSequence();
-		return SQ;
-	}
+	
 	private ActionSequence geCityArresttSQ() {
 		var SQ = new ActionSequence();
 		return SQ;

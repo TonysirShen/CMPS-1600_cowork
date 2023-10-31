@@ -35,7 +35,6 @@ public class Character implements IEntity, IThing<Character.BodyTypes>{
 		this(name.toString(),null);
 	}
 		// TODO Auto-generated constructor stub
-	}
 
 	//interface methods
 	@Override
@@ -47,15 +46,7 @@ public class Character implements IEntity, IThing<Character.BodyTypes>{
 	public String getName() {
 		return name;
 	}
-	public Character get() {
-		try {
-			return (Character)(Things.get(ThingNames.(this.name)).get());	
-			
-	}
-		catch(Exception e) {
-			return null;
-		}
-}
+	
 
 	public HairStyle getHairStyle() {
 		// TODO Auto-generated method stub
@@ -66,3 +57,4 @@ public class Character implements IEntity, IThing<Character.BodyTypes>{
 		// TODO Auto-generated method stub
 		return this.clothing;
 	}
+}
