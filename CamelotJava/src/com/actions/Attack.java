@@ -4,10 +4,11 @@ import com.entities.Character;
 public class Attack implements IAction {
 	private Character character;
 	private Character other;
-	
-	public Attack(Character c, Character o) {
+	private boolean condition;
+	public Attack(Character c, Character o,boolean t) {
 		this.character = c;
 		this.other = o;
+		this.condition = t;
 	}
 	@Override
 	public String getName() {
@@ -22,6 +23,6 @@ public class Attack implements IAction {
 	}
 	@Override
 	public String toString() {
-		return String.format("%s(%s,%s)", getName(),character.getName(),other.getName());
+		return String.format("%s(%s,%s,%s)", getName(),character.getName(),other.getName(),condition);
 	}
 }
