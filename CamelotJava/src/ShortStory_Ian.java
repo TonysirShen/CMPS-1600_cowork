@@ -3,6 +3,8 @@ import com.storygraph.ActionMap;
 import com.storygraph.INode;
 import com.storygraph.Node;
 
+//import ShortStory_main.NodeLabels;
+
 import java.util.Hashtable;
 
 import com.actions.*;
@@ -12,6 +14,8 @@ import com.entities.Character.Clothing;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
+import com.playerInput.ActionChoice;
+import com.playerInput.ActionChoice.Icons;
 import com.sequences.CharacterCreation;
 
 public class ShortStory_Ian implements IStory{
@@ -24,7 +28,8 @@ public class ShortStory_Ian implements IStory{
 		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
 		gethelmet2, successSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
 		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
-		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort, ReturnToCity	
+		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort, ReturnToCity,
+		cityarrest
 	}
 	
 	public void ShortStory_main() {
@@ -39,6 +44,7 @@ public class ShortStory_Ian implements IStory{
 
 	@Override
 	public INode getRoot() {
+		var cityarrest = new Node(NodeLabels.cityarrest.toString());
 		var jailgameover = new Node(NodeLabels.JailGameOver.toString());
 		var startjailquest = new Node(NodeLabels.StartJailQuest.toString());
 		var clothgameoverleave = new Node(NodeLabels.ClothGameOverLeave.toString());
@@ -46,6 +52,7 @@ public class ShortStory_Ian implements IStory{
 		var merchanttalk = new Node(NodeLabels.MerchantTalk.toString());
 		var clothport = new Node(NodeLabels.ClothPort.toString());
 		var returntocity = new Node(NodeLabels.ReturnToCity.toString());
+		var city = new Node(NodeLabels.City.toString());
 		var castlecrossroad = new Node(NodeLabels.CastleCrossRoad.toString());
 		var greathall = new Node(NodeLabels.GreatHall.toString());
 		var getsword = new Node(NodeLabels.Getsword.toString());
@@ -68,9 +75,93 @@ public class ShortStory_Ian implements IStory{
 		var guardcamp = new Node(NodeLabels.GuardCamp.toString());
 		var getswordhelmet = new Node(NodeLabels.GetSwordHelmet.toString());
 		var gameover = new Node(NodeLabels.GameOVER.toString());
+
+		
+		
+		//child
+		cityarrest.addChild(new ActionChoice("Guard",
+				characterList.get(ThingNames.guard),
+				Icons.draw,
+				"Fight with Guard",
+				true), jailgameover);
+		cityarrest.addChild(new ActionChoice("Guard",
+				characterList.get(ThingNames.guard),
+				Icons.talk,
+				"Talk to Guard",
+				true), startjailquest);
+
+		//CHECK ICON ON THIS ONE
+		startjailquest.addChild(new ActionChoice("Cloth",
+				itemList.get(ThingNames.Bluecloth),
+				Icons.snake,
+				"Steal the cloth",
+				true), clothgameoversteal);
+		startjailquest.addChild(new ActionChoice("Merchant",
+				characterList.get(ThingNames.merchant),
+				Icons.talk,
+				"Talk to the merchant",
+				true), clothport);
+		//How to do section of place
+		clothport.addChild(new ActionChoice("Exit",
+				placeList.get(ThingNames.Port).getFurniture("Exit"),
+				Icons.exit,
+				"Exit the port",
+				true), clothgameoverleave);
+		
+		//check icon
+		clothport.addChild(new ActionChoice("Beggar",
+				characterList.get(ThingNames.guard),
+				Icons.talk,
+				"Give to beggar",
+				true), returntocity);
+		returntocity.addChild(new ActionChoice("Exit",
+				placeList.get(ThingNames.Port).getFurniture("Exit"),
+				Icons.exit,
+				"Return to the city",
+				true), city);
+		
+		//right side
+		blacksmith.addChild(new ActionChoice("Blacksmith",
+				characterList.get(ThingNames.blacksmith),
+				Icons.talk,
+				"Talk to blacksmith",
+				true), gethelmet);
+		//How to do section of place
+		gethelmet.addChild(new ActionChoice("Exit",
+				placeList.get(ThingNames.blacksmith).getFurniture("Door"),
+				Icons.exit,
+				"Exit the blacksmith",
+				true), helmetcity);
+		//How to do section of place
+		helmetcity.addChild(new ActionChoice("Exit",
+				placeList.get(ThingNames.city).getFurniture("West End"),
+				Icons.exit,
+				"Exit the city",
+				true), failspookyroad);
+		//How to do section of place
+		helmetcity.addChild(new ActionChoice("Exit",
+				placeList.get(ThingNames.city).getFurniture("East End"),
+				Icons.exit,
+				"Exit the city",
+				true), helmetcrossroad);
+		//how to do section of place
+		helmetcrossroad.addChild(new ActionChoice("Enter",
+				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
+				Icons.exit,
+				"Enter the castle",
+				true), helmetgreathall);
+		//Do we need helmet get sword
+		//Do we need all of these
+		
 		
 		
 		return new Node("root");
+		
+		
+		//DO I NEED return to city edge????
+		
+		
+		
 		
 	}
 
@@ -100,6 +191,12 @@ public class ShortStory_Ian implements IStory{
 		
 		// TODO Auto-generated method stub
 	}
+	
+	
+	
+	
+	
+	
 	
 	//Action Sequence
 	//Right Side
