@@ -3,6 +3,7 @@ import com.storygraph.ActionMap;
 import com.storygraph.INode;
 import com.storygraph.Node;
 
+
 import java.util.Hashtable;
 
 import com.actions.*;
@@ -14,6 +15,10 @@ import com.entities.Character.HairStyle;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
+import com.playerInput.*;
+import com.playerInput.ActionChoice.Icons;
+import com.playerInput.PositionChoice;
+import com.playerInput.PositionChoice.Condition;
 import com.sequences.CharacterCreation;
 
 public class ShortStory_desktop implements IStory{
@@ -24,9 +29,9 @@ public class ShortStory_desktop implements IStory{
 	private enum ActionNames{};
 	private enum NodeLabels{
 		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
-		gethelmet2, successSpookyRoad, BanditSubmit, Ruin, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
+		gethelmet2, successSpookyRoad, BanditSubmit, Ruin, FightWithWarlock,GreatHallreward, Blacksmith, getHelmet, helmetCity, 
 		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
-		GameOVER, GreatHall	
+		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort, ReturnToCity	
 	}
 	
 	public ShortStory_desktop() {
@@ -41,8 +46,75 @@ public class ShortStory_desktop implements IStory{
 
 	@Override
 	public INode getRoot() {
-		
-		return new Node("root");
+		var init = new Node(NodeLabels.Init.toString())
+		var city = new Node(NodeLabels.City.toString());
+		var jailgameover = new Node(NodeLabels.JailGameOver.toString());
+		var startjailquest = new Node(NodeLabels.StartJailQuest.toString());
+		var clothgameoverleave = new Node(NodeLabels.ClothGameOverLeave.toString());
+		var clothgameoversteal = new Node(NodeLabels.ClothGameOverSteal.toString());
+		var merchanttalk = new Node(NodeLabels.MerchantTalk.toString());
+		var clothport = new Node(NodeLabels.ClothPort.toString());
+		var returntocity = new Node(NodeLabels.ReturnToCity.toString());
+		var castlecrossroad = new Node(NodeLabels.CastleCrossRoad.toString());
+		var greathall = new Node(NodeLabels.GreatHall.toString());
+		var getsword = new Node(NodeLabels.Getsword.toString());
+		var swordcity = new Node(NodeLabels.Sword_city.toString());
+		var swordblacksmith = new Node(NodeLabels.swordBlackSmith.toString());
+		var talktoblacksmith2 = new Node(NodeLabels.TalktoBlacksmith2.toString());
+		var gethelmet2 = new Node(NodeLabels.gethelmet2.toString());
+		var successspookyroad = new Node(NodeLabels.successSpookyRoad.toString());
+		var banditsubmit = new Node(NodeLabels.BanditSubmit.toString());
+		var dungeon = new Node(NodeLabels.Ruin.toString());
+		var fightwithwarlock = new Node(NodeLabels.FightWithWarlock.toString());
+		var blacksmith = new Node(NodeLabels.Blacksmith.toString());
+		var gethelmet = new Node(NodeLabels.getHelmet.toString());
+		var helmetcity = new Node(NodeLabels.helmetCity.toString());
+		var helmetcrossroad = new Node(NodeLabels.helmetCrossroad.toString());
+		var helmetgreathall = new Node(NodeLabels.helmetGreatHall.toString());
+		var helmetgetsword = new Node(NodeLabels.helmetGetSword.toString());
+		var failspookyroad = new Node(NodeLabels.failSpookyRoad.toString());
+		var banditwin = new Node(NodeLabels.BanditWin.toString());
+		var guardcamp = new Node(NodeLabels.GuardCamp.toString());
+		var getswordhelmet = new Node(NodeLabels.GetSwordHelmet.toString());
+		var gameover = new Node(NodeLabels.GameOVER.toString());
+		city.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
+				"City.WestEnd",
+				Condition.arrived),
+				castlecrossroad);
+		city.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.city).getFurniture("BrownHouseDoor"),
+				Icons.unlock,
+				"Open the door",
+				true),
+				blacksmith);
+		castlecrossroad.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
+				Icons.unlock,
+				"Open the Gate",
+				true),
+				getsword);
+		getsword.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
+				Icons.unlock,
+				"Open the Gate",
+				true), swordcity);
+		swordcity.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.city).getFurniture("BrownHouseDoor"),
+				Icons.unlock,
+				"Open the door",
+				true), swordblacksmith);
+		swordcity.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
+				"City.EastEnd",
+				Condition.arrived),
+				failspookyroad);
+		swordblacksmith.addChild(new ActionChoice("Talk",
+				characterList.get(ThingNames.blacksmith),
+				Icons.talk,
+				"Talk to the blacksmith",
+				true), talktoblacksmith2);
+		talktoblacksmith2.addChild(new SelectionChoice("Helmet"),
+				gethelmet2);
+		return init;
 	}
 
 	@Override
