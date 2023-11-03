@@ -209,6 +209,11 @@ public class ShortStory_Ian implements IStory{
 	@Override
 	public void getThings() {
 		
+		//GUARD 1
+		characterList.put(ThingNames.guard,new Character(ThingNames.guard2));
+		
+		
+		
 		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo));
 		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
 		characterList.put(ThingNames.king,new Character(ThingNames.king));
@@ -234,10 +239,26 @@ public class ShortStory_Ian implements IStory{
 	}
 	
 	
+	//GET CITY ADD GUARD2
 	
-	
-	
-	
+	private ActionSequence getCitySQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard2)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.city)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.guard)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Did you hear what happened? The warlock is running rampant at the ruins. The king wants him to be stopped."));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Wow that sounds bad. If someone is able to stop him, he will become famous forever."));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
 	
 	//Action Sequence
 	//Right Side
@@ -261,7 +282,7 @@ public class ShortStory_Ian implements IStory{
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
-	
+
 	private ActionSequence getgetHelmetSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new ShowDialog(true));
@@ -286,7 +307,7 @@ public class ShortStory_Ian implements IStory{
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
-	
+
 	private ActionSequence gethelmetCrossroadSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new FadeOut(true));
@@ -322,8 +343,6 @@ public class ShortStory_Ian implements IStory{
 	
 	
 	//SIDE QUEST
-	
-	
 	private ActionSequence getCityArresttSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
