@@ -199,7 +199,7 @@ public class ShortStory_Ian implements IStory{
 		return new Node("root");
 		
 		
-		//DO I NEED return to city edge????
+
 		
 		
 		
@@ -209,7 +209,7 @@ public class ShortStory_Ian implements IStory{
 	@Override
 	public void getThings() {
 		
-		//GUARD 1
+		//GUARD 2
 		characterList.put(ThingNames.guard,new Character(ThingNames.guard2));
 		
 		
