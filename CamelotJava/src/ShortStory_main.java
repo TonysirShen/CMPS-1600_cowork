@@ -26,11 +26,11 @@ public class ShortStory_main implements IStory{
 	
 	private enum ActionNames{};
 	private enum NodeLabels{
-		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
+		Start, Init, PeasantClothing, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
 		gethelmet2, successSpookyRoad, BanditSubmit, Ruins, FightWithWarlock,GreatHallreward, Blacksmith, getHelmet, helmetCity, 
-		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
-		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort,
-		ReturnToCity, BanditGameOver, FindCoin	
+		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin,  BanditGameOver,GuardCamp, FindCoin,GetSwordHelmet, 
+		campGameOVER, GreatHall, CityArrest,JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort,
+		ReturnToCity	
 	}
 	public ShortStory_main() {
 		getThings();
@@ -39,12 +39,74 @@ public class ShortStory_main implements IStory{
 	@Override
 	public ActionMap getMap() {
 		// TODO Auto-generated method stub
-		return null;
+		var map=new ActionMap();
+		//Initial
+		map.add(NodeLabels.Init.toString(), getInitSQ());
+		map.add(NodeLabels.Start.toString(), getStartSQ());
+		//sweethome
+		map.add(NodeLabels.PeasantClothing.toString(), getPeasantClothingSQ());
+		//Main Ruin Quest
+		map.add(NodeLabels.City.toString(), getCitySQ());
+		//1 castle 2 helmet
+		map.add(NodeLabels.CastleCrossRoad.toString(), getCastleCrossRoadSQ());
+		map.add(NodeLabels.Getsword.toString(), getGetSwordSQ());
+		map.add(NodeLabels.Sword_city.toString(), getSword_CitySQ());
+		map.add(NodeLabels.swordBlackSmith.toString(), getSwordBlackSmithSQ());
+		
+		map.add(NodeLabels.TalktoBlacksmith2.toString(), getTalktoBlacksmithSQ2());
+		map.add(NodeLabels.gethelmet2.toString(), getGetHelmet2SQ());
+		//Good end
+		map.add(NodeLabels.successSpookyRoad.toString(), getSuccessSpookyRoadSQ());
+		map.add(NodeLabels.BanditSubmit.toString(), getBanditSubmitSQ());
+		map.add(NodeLabels.Ruins.toString(), getRuinsSQ());
+		map.add(NodeLabels.FightWithWarlock.toString(), getFightWithWarlockSQ());
+		map.add(NodeLabels.GreatHallreward.toString(), getGreatHallRewardSQ());
+		//1 helmet 2 castle
+		map.add(NodeLabels.Blacksmith.toString(), getBlacksmithSQ());
+		map.add(NodeLabels.getHelmet.toString(), getGetHelmetSQ());
+		
+		map.add(NodeLabels.helmetCity.toString(), getHelmetCitySQ());
+		map.add(NodeLabels.helmetCrossroad.toString(), getHelmetCrossroadSQ());
+		map.add(NodeLabels.helmetGreatHall.toString(), getHelmetGreatHallSQ());
+		map.add(NodeLabels.helmetGetSword.toString(), getHelmetGetSwordSQ());
+		//Camp quest
+		map.add(NodeLabels.failSpookyRoad.toString(), getFailSpookyRoadSQ());
+		map.add(NodeLabels.BanditWin.toString(), getBanditWinSQ());
+		map.add(NodeLabels.GuardCamp.toString(), getGuardCampSQ());
+		map.add(NodeLabels.GetSwordHelmet.toString(), getGetSwordHelmetSQ());
+		
+		map.add(NodeLabels.campGameOVER.toString(), getCampGameOverSQ());
+		map.add(NodeLabels.BanditGameOver.toString(), getBanditGameOverSQ());
+		
+		//Side quest
+		map.add(NodeLabels.CityArrest.toString(), getCityArrestSQ());
+		map.add(NodeLabels.JailGameOver.toString(), getJailGameOverSQ());
+		map.add(NodeLabels.StartJailQuest.toString(), getStartJailQuestSQ());
+		
+		map.add(NodeLabels.ClothGameOverLeave.toString(), getClothGameOverLeaveSQ());
+		map.add(NodeLabels.ClothGameOverSteal.toString(), getClothGameOverStealSQ());
+		map.add(NodeLabels.MerchantTalk.toString(), getMerchantTalkSQ());
+		map.add(NodeLabels.ClothPort.toString(), getClothPortSQ());
+		
+		map.add(NodeLabels.ReturnToCity.toString(), getReturnToCitySQ());
+	
+		
+		
+		
+		return map;
+		
+		
 	}
+
+	@Override
+	
 
 	public INode getRoot() {
 		var init = new Node(NodeLabels.Init.toString());
+		var start = new Node(NodeLabels.Start.toString());
+		var peasantClothing = new Node(NodeLabels.PeasantClothing.toString());
 		var city = new Node(NodeLabels.City.toString());
+		var cityarrest = new Node(NodeLabels.CityArrest.toString());
 		var jailgameover = new Node(NodeLabels.JailGameOver.toString());
 		var startjailquest = new Node(NodeLabels.StartJailQuest.toString());
 		var clothgameoverleave = new Node(NodeLabels.ClothGameOverLeave.toString());
@@ -75,8 +137,24 @@ public class ShortStory_main implements IStory{
 		var banditGameOver = new Node(NodeLabels.BanditGameOver.toString());
 		var findCoin = new Node(NodeLabels.FindCoin.toString());
 		var getswordhelmet = new Node(NodeLabels.GetSwordHelmet.toString());
-		var campGameOver = new Node(NodeLabels.GameOVER.toString());
+		var campGameOver = new Node(NodeLabels.campGameOVER.toString());
 		var greatHallreward = new Node(NodeLabels.GreatHallreward.toString());
+		init.addChild(new SelectionChoice("Start"), start);
+		start.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.home).getFurniture("Door"),
+				Icons.unlock,
+				"Open the door",
+				true), cityarrest);
+		start.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.home).getFurniture("Chest"),
+				Icons.unlock,
+				"Put on Cloth",
+				true), peasantClothing);
+		peasantClothing.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.home).getFurniture("Door"),
+				Icons.unlock,
+				"Open the door",
+				true), city);
 		city.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
 				"City.WestEnd",
 				Condition.arrived),
@@ -120,6 +198,29 @@ public class ShortStory_main implements IStory{
 				Condition.arrived),
 				successspookyroad);
 		// 1 helmet 2 sword
+		blacksmith.addChild(new ActionChoice("Blacksmith",
+				characterList.get(ThingNames.blacksmith),
+				Icons.talk,
+				"Talk to blacksmith",
+				true), gethelmet);
+		
+		gethelmet.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"Blacksmith.Door", Condition.arrived), helmetcity);
+		helmetcity.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"City.WestEnd", Condition.arrived), failspookyroad);
+		helmetcity.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"City.EastEnd", Condition.arrived), helmetcrossroad);
+		
+		helmetcrossroad.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"CastleCrossroad.Gate", Condition.arrived), helmetgreathall);
+		helmetgetsword.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"GreatHall.Gate", Condition.arrived), successspookyroad);
+		
 		// camp route
 		failspookyroad.addChild(new SelectionChoice("Revive"), 
 				guardcamp);
@@ -164,6 +265,44 @@ public class ShortStory_main implements IStory{
 				"Camp.Exit",
 				Condition.arrived),
 				successspookyroad);
+		//side quest
+		cityarrest.addChild(new ActionChoice("Guard",
+				characterList.get(ThingNames.guard),
+				Icons.draw,
+				"Fight with Guard",
+				true), jailgameover);
+		cityarrest.addChild(new ActionChoice("Guard",
+				characterList.get(ThingNames.guard),
+				Icons.talk,
+				"Talk to Guard",
+				false), startjailquest);
+
+		startjailquest.addChild(new ActionChoice("Cloth",
+				itemList.get(ThingNames.Bluecloth),
+				Icons.snake,
+				"Steal the cloth",
+				true), clothgameoversteal);
+		startjailquest.addChild(new ActionChoice("Merchant",
+				characterList.get(ThingNames.merchant),
+				Icons.talk,
+				"Talk to the merchant",
+				true), clothport);
+		clothport.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"Port.Exit", Condition.arrived), clothgameoverleave);
+		
+		
+		clothport.addChild(new ActionChoice("Beggar",
+				characterList.get(ThingNames.guard),
+				Icons.talk,
+				"Give to beggar",
+				true), returntocity);
+		returntocity.addChild(new ActionChoice("Exit",
+				placeList.get(ThingNames.Port).getFurniture("Exit"),
+				Icons.exit,
+				"Return to the city",
+				true), city);
+		
 		return init;
 	}
 
@@ -265,7 +404,14 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(false));
 		return SQ;
 	}
-	
+	private ActionSequence getCitySQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.city)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
 	//Dungeon main quest
 	//1 sword 2 helmet
 	private ActionSequence getCastleCrossRoadSQ() {
@@ -454,7 +600,7 @@ public class ShortStory_main implements IStory{
 	}
 	
 	// warlock fight & wonderful ending
-	private ActionSequence getRuinSQ() {
+	private ActionSequence getRuinsSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
@@ -655,7 +801,7 @@ public class ShortStory_main implements IStory{
 	}
 	
 	// SIDE_QUEST
-	private ActionSequence geCityArresttSQ() {
+	private ActionSequence getCityArrestSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
