@@ -16,6 +16,8 @@ import com.entities.Item.Items;
 import com.entities.Place.Places;
 import com.playerInput.ActionChoice;
 import com.playerInput.ActionChoice.Icons;
+import com.playerInput.PositionChoice;
+import com.playerInput.PositionChoice.Condition;
 import com.sequences.CharacterCreation;
 
 public class ShortStory_Ian implements IStory{
@@ -139,10 +141,10 @@ public class ShortStory_Ian implements IStory{
 				"Talk to Guard",
 				true), startjailquest);
 
-		//CHECK ICON ON THIS ONE
+		
 		startjailquest.addChild(new ActionChoice("Cloth",
 				itemList.get(ThingNames.Bluecloth),
-				Icons.snake,
+				Icons.hand,
 				"Steal the cloth",
 				true), clothgameoversteal);
 		startjailquest.addChild(new ActionChoice("Merchant",
@@ -150,14 +152,12 @@ public class ShortStory_Ian implements IStory{
 				Icons.talk,
 				"Talk to the merchant",
 				true), clothport);
-		//How to do section of place
-		clothport.addChild(new ActionChoice("Exit",
-				placeList.get(ThingNames.Port).getFurniture("Exit"),
-				Icons.exit,
-				"Exit the port",
-				true), clothgameoverleave);
 		
-		//check icon
+		clothport.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"Port.Exit", Condition.arrived), clothgameoverleave);
+		
+		
 		clothport.addChild(new ActionChoice("Beggar",
 				characterList.get(ThingNames.guard),
 				Icons.talk,
@@ -175,32 +175,24 @@ public class ShortStory_Ian implements IStory{
 				Icons.talk,
 				"Talk to blacksmith",
 				true), gethelmet);
-		//How to do section of place
-		gethelmet.addChild(new ActionChoice("Exit",
-				placeList.get(ThingNames.blacksmith).getFurniture("Door"),
-				Icons.exit,
-				"Exit the blacksmith",
-				true), helmetcity);
-		//How to do section of place
-		helmetcity.addChild(new ActionChoice("Exit",
-				placeList.get(ThingNames.city).getFurniture("West End"),
-				Icons.exit,
-				"Exit the city",
-				true), failspookyroad);
-		//How to do section of place
-		helmetcity.addChild(new ActionChoice("Exit",
-				placeList.get(ThingNames.city).getFurniture("East End"),
-				Icons.exit,
-				"Exit the city",
-				true), helmetcrossroad);
-		//how to do section of place
-		helmetcrossroad.addChild(new ActionChoice("Enter",
-				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
-				Icons.exit,
-				"Enter the castle",
-				true), helmetgreathall);
-		//Do we need helmet get sword
-		//Do we need all of these
+		
+		gethelmet.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"Blacksmith.Door", Condition.arrived), helmetcity);
+		helmetcity.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"City.WestEnd", Condition.arrived), failspookyroad);
+		helmetcity.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"City.EastEnd", Condition.arrived), helmetcrossroad);
+		
+		helmetcrossroad.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"CastleCrossroad.Gate", Condition.arrived), helmetgreathall);
+		helmetgetsword.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"GreatHall.Gate", Condition.arrived), successspookyroad);
+		
 		
 		
 		
