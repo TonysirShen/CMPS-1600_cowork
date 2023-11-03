@@ -29,7 +29,7 @@ public class ShortStory_Ian implements IStory{
 		gethelmet2, successSpookyRoad, BanditSubmit, Dungeon, FightWithWarlock, Blacksmith, getHelmet, helmetCity, 
 		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
 		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort, ReturnToCity,
-		cityarrest
+		cityarrest, peasantclothing
 	}
 	
 	public void ShortStory_main() {
@@ -39,7 +39,56 @@ public class ShortStory_Ian implements IStory{
 	@Override
 	public ActionMap getMap() {
 		// TODO Auto-generated method stub
-		return null;
+		var map=new ActionMap();
+		map.add(NodeLabels.Init.toString(), getInitSQ());
+		map.add(NodeLabels.Start.toString(), getStartSQ());
+		map.add(NodeLabels.Cottage.toString(), getCottageSQ());
+		map.add(NodeLabels.City.toString(), getCitySQ());
+		
+		map.add(NodeLabels.CastleCrossRoad.toString(), getCastleCrossRoadSQ());
+		map.add(NodeLabels.Getsword.toString(), getGetswordSQ());
+		map.add(NodeLabels.Sword_city.toString(), getSword_citySQ());
+		map.add(NodeLabels.swordBlackSmith.toString(), getswordBlackSmithSQ());
+		
+		map.add(NodeLabels.TalktoBlacksmith2.toString(), getTalktoBlacksmith2SQ());
+		map.add(NodeLabels.gethelmet2.toString(), getgethelmet2SQ());
+		map.add(NodeLabels.successSpookyRoad.toString(), getsuccessSpookyRoadSQ());
+		map.add(NodeLabels.BanditSubmit.toString(), getBanditSubmitSQ());
+		
+		map.add(NodeLabels.Dungeon.toString(), getDungeonSQ());
+		map.add(NodeLabels.FightWithWarlock.toString(), getFightWithWarlockSQ());
+		map.add(NodeLabels.Blacksmith.toString(), getBlacksmithSQ());
+		map.add(NodeLabels.getHelmet.toString(), getgetHelmetSQ());
+		
+		map.add(NodeLabels.helmetCity.toString(), gethelmetCitySQ());
+		map.add(NodeLabels.helmetCrossroad.toString(), gethelmetCrossroadSQ());
+		map.add(NodeLabels.helmetGreatHall.toString(), gethelmetGreatHallSQ());
+		map.add(NodeLabels.helmetGetSword.toString(), gethelmetGetSwordSQ());
+		
+		map.add(NodeLabels.failSpookyRoad.toString(), getfailSpookyRoadSQ());
+		map.add(NodeLabels.BanditWin.toString(), getBanditWinSeQ());
+		map.add(NodeLabels.GuardCamp.toString(), getGuardCampSQ());
+		map.add(NodeLabels.GetSwordHelmet.toString(), getGetSwordHelmetSQ());
+		
+		map.add(NodeLabels.GameOVER.toString(), getGameOVERSQ());
+		map.add(NodeLabels.GreatHall.toString(), getGreatHallSQ());
+		map.add(NodeLabels.JailGameOver.toString(), getJailGameOverSQ());
+		map.add(NodeLabels.StartJailQuest.toString(), getStartJailQuestSQ());
+		
+		map.add(NodeLabels.ClothGameOverLeave.toString(), getClothGameOverLeaveSQ());
+		map.add(NodeLabels.ClothGameOverSteal.toString(), getClothGameOverStealSQ());
+		map.add(NodeLabels.MerchantTalk.toString(), getMerchantTalkSQ());
+		map.add(NodeLabels.ClothPort.toString(), getClothPortSQ());
+		
+		map.add(NodeLabels.ReturnToCity.toString(), getReturnToCitySQ());
+		map.add(NodeLabels.cityarrest.toString(), getcityarrestSQ());
+		map.add(NodeLabels.peasantclothing.toString(), getpeasantclothingSQ());
+		
+		
+		
+		return map;
+		
+		
 	}
 
 	@Override
