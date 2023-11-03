@@ -29,9 +29,10 @@ public class ShortStory_desktop implements IStory{
 	private enum ActionNames{};
 	private enum NodeLabels{
 		Start, Init, Cottage, City, CastleCrossRoad, Getsword, Sword_city, swordBlackSmith, TalktoBlacksmith2,
-		gethelmet2, successSpookyRoad, BanditSubmit, Ruin, FightWithWarlock,GreatHallreward, Blacksmith, getHelmet, helmetCity, 
+		gethelmet2, successSpookyRoad, BanditSubmit, Ruins, FightWithWarlock,GreatHallreward, Blacksmith, getHelmet, helmetCity, 
 		helmetCrossroad, helmetGreatHall, helmetGetSword, failSpookyRoad, BanditWin, GuardCamp,GetSwordHelmet, 
-		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort, ReturnToCity	
+		GameOVER, GreatHall, JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort,
+		ReturnToCity, BanditGameOver, FindCoin	
 	}
 	
 	public ShortStory_desktop() {
@@ -43,10 +44,11 @@ public class ShortStory_desktop implements IStory{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public INode getRoot() {
-		var init = new Node(NodeLabels.Init.toString())
+		var init = new Node(NodeLabels.Init.toString());
 		var city = new Node(NodeLabels.City.toString());
 		var jailgameover = new Node(NodeLabels.JailGameOver.toString());
 		var startjailquest = new Node(NodeLabels.StartJailQuest.toString());
@@ -64,7 +66,7 @@ public class ShortStory_desktop implements IStory{
 		var gethelmet2 = new Node(NodeLabels.gethelmet2.toString());
 		var successspookyroad = new Node(NodeLabels.successSpookyRoad.toString());
 		var banditsubmit = new Node(NodeLabels.BanditSubmit.toString());
-		var dungeon = new Node(NodeLabels.Ruin.toString());
+		var ruins = new Node(NodeLabels.Ruins.toString());
 		var fightwithwarlock = new Node(NodeLabels.FightWithWarlock.toString());
 		var blacksmith = new Node(NodeLabels.Blacksmith.toString());
 		var gethelmet = new Node(NodeLabels.getHelmet.toString());
@@ -75,8 +77,11 @@ public class ShortStory_desktop implements IStory{
 		var failspookyroad = new Node(NodeLabels.failSpookyRoad.toString());
 		var banditwin = new Node(NodeLabels.BanditWin.toString());
 		var guardcamp = new Node(NodeLabels.GuardCamp.toString());
+		var banditGameOver = new Node(NodeLabels.BanditGameOver.toString());
+		var findCoin = new Node(NodeLabels.FindCoin.toString());
 		var getswordhelmet = new Node(NodeLabels.GetSwordHelmet.toString());
-		var gameover = new Node(NodeLabels.GameOVER.toString());
+		var campGameOver = new Node(NodeLabels.GameOVER.toString());
+		var greatHallreward = new Node(NodeLabels.GreatHallreward.toString());
 		city.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
 				"City.WestEnd",
 				Condition.arrived),
@@ -87,6 +92,7 @@ public class ShortStory_desktop implements IStory{
 				"Open the door",
 				true),
 				blacksmith);
+		// 1 castle 2 blacksmith
 		castlecrossroad.addChild(new ActionChoice("Open",
 				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
 				Icons.unlock,
@@ -114,6 +120,46 @@ public class ShortStory_desktop implements IStory{
 				true), talktoblacksmith2);
 		talktoblacksmith2.addChild(new SelectionChoice("Helmet"),
 				gethelmet2);
+		gethelmet2.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
+				"City.EastEnd",
+				Condition.arrived),
+				successspookyroad);
+		// 1 helmet 2 sword
+		// camp route
+		failspookyroad.addChild(new SelectionChoice("Revive"), 
+				guardcamp);
+		failspookyroad.addChild(new SelectionChoice("Die"), 
+				banditGameOver);
+		guardcamp.addChild(new ActionChoice("Take",
+				itemList.get(ThingNames.Greenpotion),
+				Icons.drink,
+				"Take the potion",
+				true), campGameOver);
+		guardcamp.addChild(new ActionChoice("Open",
+				placeList.get(ThingNames.camp).getFurniture("Chest"),
+				Icons.unlock,
+				"Open the chest",
+				true), findCoin);
+		findCoin.addChild(new ActionChoice("Take",
+				itemList.get(ThingNames.Greenpotion),
+				Icons.drink,
+				"Take the potion",
+				true), campGameOver);
+		// success ending
+		successspookyroad.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
+				"SpookyPath.EastEnd",
+				Condition.arrived),
+				ruins);
+		ruins.addChild(new ActionChoice("Take",
+				characterList.get(ThingNames.blacksmith),
+				Icons.research,
+				"Take a look if the book",
+				true),
+				fightwithwarlock);
+		fightwithwarlock.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
+				"Ruins.Exit",
+				Condition.arrived), greatHallreward);
+		greatHallreward.addChild(null, null);
 		return init;
 	}
 
@@ -255,25 +301,30 @@ public class ShortStory_desktop implements IStory{
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("Looks like you get the sword from the king, now take the helmet, you can be the hero to defeat the warlock!"));
+		SQ.add(new SetDialog("Hi, I need some armor, can I get one here?"));
 		SQ.add(new ShowDialog(false));
-		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet) ));
-		SQ.add(new Give(characterList.get(ThingNames.blacksmith), itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("Now Warrior, Take you way to success!!!"));
+		SQ.add(new SetDialog("What armor whould you like?"));
 		SQ.add(new ShowDialog(false));
-		SQ.add(new EnableInput(true));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("[Helmet|I would like to have the helmet]"));
 		return SQ;
 	}
 	private ActionSequence getGetHelmet2SQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new ShowDialog(true));
-		SQ.add(new EnableInput(false));
 		SQ.add(new ShowDialog(false));
-		SQ.add(new SetDialog("My warrior you are here, you can take the helmet."));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("It looks like the king already give you the sword \n So I will give you the helmet."));
 		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet)));
 		SQ.add(new Give(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmor));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Now you are fully prepared for you mission!"));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),placeList.get(ThingNames.BShouse).getFurniture("Door")));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.king),placeList.get(ThingNames.city),"BrownHouseDoor"));
+		SQ.add(new FadeOut(false));
 		SQ.add(new EnableInput(true));;
 		return SQ;
 	}
