@@ -18,11 +18,11 @@ import com.playerInput.*;
 import com.playerInput.ActionChoice.Icons;
 import com.playerInput.PositionChoice.Condition;
 import com.sequences.CharacterCreation;
-
+ 	
 public class ShortStory_main implements IStory{
-	private Hashtable<ThingNames,Character> characterList = new Hashtable<>();
-	private Hashtable<ThingNames,Place> placeList = new Hashtable<>();
-	private Hashtable<ThingNames,Item> itemList = new Hashtable<>();
+	private Hashtable<ThingNames,Character> characterList = new Hashtable<ThingNames,Character>();
+	private Hashtable<ThingNames,Place> placeList = new Hashtable<ThingNames,Place>();
+	private Hashtable<ThingNames,Item> itemList = new Hashtable<ThingNames,Item>();
 	
 	private enum ActionNames{};
 	private enum NodeLabels{
@@ -246,7 +246,9 @@ public class ShortStory_main implements IStory{
 				Icons.talk,
 				"Talk to the blacksmith",
 				true),getswordhelmet);
-		getswordhelmet.addChild(null, getRoot());
+		getswordhelmet.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"Camp.Exit", Condition.arrived), successspookyroad);
 		// success ending
 		successspookyroad.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
 				"SpookyPath.EastEnd",
@@ -318,6 +320,8 @@ public class ShortStory_main implements IStory{
 		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
 		characterList.put(ThingNames.bandit2,new Character(ThingNames.bandit2));
 		characterList.put(ThingNames.bandit3,new Character(ThingNames.bandit3));
+		characterList.put(ThingNames.merchant, new Character(ThingNames.merchant));
+		characterList.put(ThingNames.beggar, new Character(ThingNames.beggar));
 		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
@@ -331,7 +335,8 @@ public class ShortStory_main implements IStory{
 		placeList.put(ThingNames.GreatHall, new Place(ThingNames.GreatHall,Places.GreatHall));
 		placeList.put(ThingNames.jail, new Place(ThingNames.jail,Places.Dungeon));
 		placeList.put(ThingNames.BShouse, new Place(ThingNames.BShouse,Places.Blacksmith));
-		
+		placeList.put(ThingNames.Port, new Place(ThingNames.Port,Places.Port));
+		placeList.put(ThingNames.Ruins, new Place(ThingNames.Ruins,Places.Ruins));
 		
 	}
 
@@ -457,8 +462,8 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.blacksmith),"Door"));
-		SQ.add(new Position(itemList.get(ThingNames.helmet),placeList.get(ThingNames.blacksmith),"Anvii"));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.BShouse),"Door"));
+		SQ.add(new Position(itemList.get(ThingNames.helmet),placeList.get(ThingNames.BShouse),"Anvii"));
 		SQ.add(new FadeOut(false));
 		SQ.add(new EnableInput(true));
 		return SQ;

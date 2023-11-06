@@ -1,10 +1,10 @@
 import com.storygraph.*;
 
 public class MainClass {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		try {
 		System.out.println("Hello");
-		var story = new SampleStory();
+		var story = new ShortStory_main();
 		var graph = new Graph();
 		var currentNode = story.getRoot();
 		var map = story.getMap();
@@ -17,7 +17,7 @@ public class MainClass {
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getStackTrace());
+			e.printStackTrace();
 		}
 	}
 }
