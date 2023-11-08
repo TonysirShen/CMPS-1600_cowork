@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import com.actions.*;
 import com.entities.*;
 import com.entities.Character;
+import com.entities.Character.BodyTypes;
 import com.entities.Character.Clothing;
 import com.entities.Character.HairStyle;
 import com.entities.IThing.ThingNames;
@@ -312,11 +313,11 @@ public class ShortStory_main implements IStory{
 	@Override
 	public void getThings() {
 		
-		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo));
+		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo.toString(),BodyTypes.A,Clothing.Naked));
 		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
 		characterList.put(ThingNames.king,new Character(ThingNames.king));
 		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1));
-		characterList.put(ThingNames.guard,new Character(ThingNames.guard));
+		characterList.put(ThingNames.guard,new Character(ThingNames.guard.toString(),BodyTypes.A,Clothing.HeavyArmor));
 		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
 		characterList.put(ThingNames.bandit2,new Character(ThingNames.bandit2));
 		characterList.put(ThingNames.bandit3,new Character(ThingNames.bandit3));
