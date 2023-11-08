@@ -10,7 +10,9 @@ import java.util.Hashtable;
 import com.actions.*;
 import com.entities.*;
 import com.entities.Character;
+import com.entities.Character.BodyTypes;
 import com.entities.Character.Clothing;
+import com.entities.Character.HairStyle;
 import com.entities.IThing.ThingNames;
 import com.entities.Item.Items;
 import com.entities.Place.Places;
@@ -209,17 +211,21 @@ public class ShortStory_Ian implements IStory{
 	@Override
 	public void getThings() {
 		
-		//GUARD 2
-		characterList.put(ThingNames.guard,new Character(ThingNames.guard2));
 		
 		
 		
-		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo));
-		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
-		characterList.put(ThingNames.king,new Character(ThingNames.king));
-		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1));
-		characterList.put(ThingNames.guard,new Character(ThingNames.guard));
-		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
+		
+		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo.toString(),BodyTypes.F,Clothing.Naked, HairStyle.Spiky));
+		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith.toString(),BodyTypes.D,Clothing.LightArmour, HairStyle.Short_Full));
+		characterList.put(ThingNames.king,new Character(ThingNames.king.toString(),BodyTypes.H,Clothing.King));
+		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1.toString(),BodyTypes.B,Clothing.Bandit));
+		characterList.put(ThingNames.guard,new Character(ThingNames.guard.toString(),BodyTypes.A,Clothing.HeavyArmor));
+		characterList.put(ThingNames.guard2,new Character(ThingNames.guard2.toString(),BodyTypes.C,Clothing.HeavyArmor));
+		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock.toString(),BodyTypes.H,Clothing.Warlock));
+		characterList.put(ThingNames.bandit2,new Character(ThingNames.bandit2.toString(),BodyTypes.B,Clothing.Bandit));
+		characterList.put(ThingNames.bandit3,new Character(ThingNames.bandit3.toString(),BodyTypes.A,Clothing.Bandit));
+		characterList.put(ThingNames.merchant, new Character(ThingNames.merchant.toString(), BodyTypes.B,Clothing.Merchant));
+		characterList.put(ThingNames.beggar, new Character(ThingNames.beggar.toString(), BodyTypes.D,Clothing.Beggar, HairStyle.Mage));
 		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
