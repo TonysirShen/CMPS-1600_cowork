@@ -312,21 +312,24 @@ public class ShortStory_main implements IStory{
 	
 	@Override
 	public void getThings() {
-		
-		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo.toString(),BodyTypes.A,Clothing.Naked));
-		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith));
-		characterList.put(ThingNames.king,new Character(ThingNames.king));
-		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1));
+		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo.toString(),BodyTypes.F,Clothing.Naked, HairStyle.Spiky));
+		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith.toString(),BodyTypes.D,Clothing.LightArmour, HairStyle.Short_Full));
+		characterList.put(ThingNames.king,new Character(ThingNames.king.toString(),BodyTypes.H,Clothing.King));
+		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1.toString(),BodyTypes.B,Clothing.Bandit));
 		characterList.put(ThingNames.guard,new Character(ThingNames.guard.toString(),BodyTypes.A,Clothing.HeavyArmor));
-		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock));
-		characterList.put(ThingNames.bandit2,new Character(ThingNames.bandit2));
-		characterList.put(ThingNames.bandit3,new Character(ThingNames.bandit3));
-		characterList.put(ThingNames.merchant, new Character(ThingNames.merchant));
-		characterList.put(ThingNames.beggar, new Character(ThingNames.beggar));
+		characterList.put(ThingNames.guard2,new Character(ThingNames.guard2.toString(),BodyTypes.C,Clothing.HeavyArmor));
+		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock.toString(),BodyTypes.H,Clothing.Warlock));
+		characterList.put(ThingNames.bandit2,new Character(ThingNames.bandit2.toString(),BodyTypes.B,Clothing.Bandit));
+		characterList.put(ThingNames.bandit3,new Character(ThingNames.bandit3.toString(),BodyTypes.A,Clothing.Bandit));
+		characterList.put(ThingNames.merchant, new Character(ThingNames.merchant.toString(), BodyTypes.B,Clothing.Merchant));
+		characterList.put(ThingNames.beggar, new Character(ThingNames.beggar.toString(), BodyTypes.D,Clothing.Beggar, HairStyle.Mage));
 		itemList.put(ThingNames.sword,new Item(ThingNames.sword,Items.Sword));
 		itemList.put(ThingNames.helmet,new Item(ThingNames.helmet,Items.Helmet));
 		itemList.put(ThingNames.Greenpotion,new Item(ThingNames.Greenpotion,Items.GreenPotion));
 		itemList.put(ThingNames.Bluecloth, new Item(ThingNames.Bluecloth,Items.BlueCloth));
+		itemList.put(ThingNames.Hammer1,new Item(ThingNames.Hammer1,Items.Hammer));
+		itemList.put(ThingNames.Hammer2,new Item(ThingNames.Hammer2,Items.Hammer));
+		itemList.put(ThingNames.Hammer3,new Item(ThingNames.Hammer3,Items.Hammer));
 		itemList.put(ThingNames.EvilBook, new Item(ThingNames.EvilBook,Items.EvilBook));
 		placeList.put(ThingNames.home, new Place(ThingNames.home,Places.Cottage));
 		placeList.put(ThingNames.city, new Place(ThingNames.city,Places.City));
@@ -368,8 +371,8 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Create<Place>(placeList.get(ThingNames.camp)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.Port)));
 		SQ.add(new Create<Place>(placeList.get(ThingNames.Ruins)));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.city)));;
-		
+		SQ.add(new Create<Place>(placeList.get(ThingNames.city)));
+		SQ.add(new Create<Place>(placeList.get(ThingNames.home)));
 		
 		//Items Creation
 		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
@@ -384,11 +387,13 @@ public class ShortStory_main implements IStory{
 		//Original
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
 		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
+		SQ.add(new ShowMenu(true));
 		
 		return SQ;
 	}
 	private ActionSequence getStartSQ() {
 		var SQ = new ActionSequence();
+
 		SQ.add(new ShowMenu(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("It is morning, time to wake up!"));
