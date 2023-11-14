@@ -15,7 +15,7 @@ public class SetDialog implements IAction {
 	@Override
 	public boolean getShouldWait() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	public String toString() {
 		return String.format("%s(%s)", getName(),this.string);

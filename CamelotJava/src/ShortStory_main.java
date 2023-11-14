@@ -157,7 +157,7 @@ public class ShortStory_main implements IStory{
 				"Open the door",
 				true), city);
 		city.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
-				"City.WestEnd",
+				"city.WestEnd",
 				Condition.arrived),
 				castlecrossroad);
 		city.addChild(new ActionChoice("Open",
@@ -184,7 +184,7 @@ public class ShortStory_main implements IStory{
 				"Open the door",
 				true), swordblacksmith);
 		swordcity.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
-				"City.EastEnd",
+				"city.EastEnd",
 				Condition.arrived),
 				failspookyroad);
 		swordblacksmith.addChild(new ActionChoice("Talk",
@@ -195,7 +195,7 @@ public class ShortStory_main implements IStory{
 		talktoblacksmith2.addChild(new SelectionChoice("Helmet"),
 				gethelmet2);
 		gethelmet2.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
-				"City.EastEnd",
+				"city.EastEnd",
 				Condition.arrived),
 				successspookyroad);
 		// 1 helmet 2 sword
@@ -210,10 +210,10 @@ public class ShortStory_main implements IStory{
 				"Blacksmith.Door", Condition.arrived), helmetcity);
 		helmetcity.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
-				"City.WestEnd", Condition.arrived), failspookyroad);
+				"city.WestEnd", Condition.arrived), failspookyroad);
 		helmetcity.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
-				"City.EastEnd", Condition.arrived), helmetcrossroad);
+				"city.EastEnd", Condition.arrived), helmetcrossroad);
 		
 		helmetcrossroad.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
@@ -316,8 +316,8 @@ public class ShortStory_main implements IStory{
 		characterList.put(ThingNames.blacksmith,new Character(ThingNames.blacksmith.toString(),BodyTypes.D,Clothing.LightArmour, HairStyle.Short_Full));
 		characterList.put(ThingNames.king,new Character(ThingNames.king.toString(),BodyTypes.H,Clothing.King));
 		characterList.put(ThingNames.bandit1,new Character(ThingNames.bandit1.toString(),BodyTypes.B,Clothing.Bandit));
-		characterList.put(ThingNames.guard,new Character(ThingNames.guard.toString(),BodyTypes.A,Clothing.HeavyArmor));
-		characterList.put(ThingNames.guard2,new Character(ThingNames.guard2.toString(),BodyTypes.C,Clothing.HeavyArmor));
+		characterList.put(ThingNames.guard,new Character(ThingNames.guard.toString(),BodyTypes.A,Clothing.HeavyArmour));
+		characterList.put(ThingNames.guard2,new Character(ThingNames.guard2.toString(),BodyTypes.C,Clothing.HeavyArmour));
 		characterList.put(ThingNames.warlock,new Character(ThingNames.warlock.toString(),BodyTypes.H,Clothing.Warlock));
 		characterList.put(ThingNames.bandit2,new Character(ThingNames.bandit2.toString(),BodyTypes.B,Clothing.Bandit));
 		characterList.put(ThingNames.bandit3,new Character(ThingNames.bandit3.toString(),BodyTypes.A,Clothing.Bandit));
@@ -418,8 +418,8 @@ public class ShortStory_main implements IStory{
 	private ActionSequence getCitySQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new FadeOut(true));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.city)));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new FadeOut(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
@@ -495,7 +495,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new SetDialog("My warrior you are here, you can take the helmet."));
 		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet)));
 		SQ.add(new Give(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
-		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmor));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmour));
 		SQ.add(new EnableInput(true));;
 		return SQ;
 	}
@@ -531,7 +531,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet)));
 		SQ.add(new Give(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
-		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmor));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmour));
 		SQ.add(new EnableInput(true));;
 		return SQ;
 	}
@@ -777,7 +777,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Give(characterList.get(ThingNames.guard),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
 		SQ.add(new Give(characterList.get(ThingNames.guard),itemList.get(ThingNames.sword),characterList.get(ThingNames.jojo)));
-		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmor));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmour));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Time to regain my honor!"));
 		SQ.add(new ShowDialog(false));
