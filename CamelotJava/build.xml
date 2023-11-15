@@ -22,7 +22,7 @@
         <mkdir dir="${build.dir}/jar" />
     	<jar destfile="${build.dir}/jar/${jar.name}" basedir="${build.dir}">
             <manifest>
-                <attribute name="Main-Class" value="MainClass" />
+                <attribute name="Main-Class" value= "MainClass" />
             </manifest>
         </jar>
     </target>
