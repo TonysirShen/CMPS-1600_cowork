@@ -153,7 +153,7 @@ public class ShortStory_main implements IStory{
 				true), peasantClothing);
 		peasantClothing.addChild(new ActionChoice("Open",
 				placeList.get(ThingNames.home).getFurniture("Door"),
-				Icons.unlock,
+				Icons.door,
 				"Open the door",
 				true), city);
 		city.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
@@ -169,7 +169,7 @@ public class ShortStory_main implements IStory{
 		// 1 castle 2 blacksmith
 		castlecrossroad.addChild(new ActionChoice("Open",
 				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
-				Icons.unlock,
+				Icons.door,
 				"Open the Gate",
 				true),
 				getsword);
@@ -293,8 +293,6 @@ public class ShortStory_main implements IStory{
 		clothport.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
 				"Port.Exit", Condition.arrived), clothgameoverleave);
-		
-		
 		clothport.addChild(new ActionChoice("Beggar",
 				characterList.get(ThingNames.guard),
 				Icons.talk,
@@ -398,6 +396,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("It is morning, time to wake up!"));
 		SQ.add(new SetDialog("Lets put the cloth on"));
+		SQ.add(new Wait(6));
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Naked));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
@@ -428,9 +427,7 @@ public class ShortStory_main implements IStory{
 	private ActionSequence getCastleCrossRoadSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new FadeOut(true));
-		SQ.add(new Create<Place>(placeList.get(ThingNames.castlecrossroad)));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.castlecrossroad)));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
 		SQ.add(new FadeOut(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Lets go to meet the King"));
