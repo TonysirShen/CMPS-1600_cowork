@@ -414,6 +414,7 @@ public class ShortStory_desktop implements IStory{
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("It is morning, time to wake up!"));
 		SQ.add(new SetDialog("Lets put the cloth on"));
+		SQ.add(new Wait(3));
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Naked));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
@@ -428,13 +429,42 @@ public class ShortStory_desktop implements IStory{
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Peasant));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Lets go to the City"));
+		SQ.add(new Wait(3));
 		SQ.add(new ShowDialog(false));
 		return SQ;
 	}
 	private ActionSequence getCitySQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new FadeOut(true));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city),"GreenHouseDoor"));
+		SQ.add(new Position(characterList.get(ThingNames.guard),placeList.get(ThingNames.city),"Bench"));
+		SQ.add(new Position(characterList.get(ThingNames.guard2),placeList.get(ThingNames.city),"Plant"));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.guard2)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new WalkTo(characterList.get(ThingNames.guard2),characterList.get(ThingNames.guard)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Have your herd about the bandit in the Forest?"));
+		SQ.add(new Wait(1));
+		SQ.add(new SetDialog("The King is calling some bravery to help"));
+		SQ.add(new Wait(2));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.guard)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Where can I find the bandit?"));
+		SQ.add(new Wait(1));
+		SQ.add(new SetDialog("I think you can just walk through the EastEnd to meet them, Be careful"));
+		SQ.add(new Wait(3));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new SetDialog("I need some gears before I go"));
+		SQ.add(new Wait(3));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
+	private ActionSequence getquickCitySQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city),"GreenHouseDoor"));
 		SQ.add(new FadeOut(false));
 		SQ.add(new EnableInput(true));
 		return SQ;

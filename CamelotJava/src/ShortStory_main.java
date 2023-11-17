@@ -99,9 +99,6 @@ public class ShortStory_main implements IStory{
 		
 	}
 
-	@Override
-	
-
 	public INode getRoot() {
 		var init = new Node(NodeLabels.Init.toString());
 		var start = new Node(NodeLabels.Start.toString());
@@ -116,7 +113,6 @@ public class ShortStory_main implements IStory{
 		var clothport = new Node(NodeLabels.ClothPort.toString());
 		var returntocity = new Node(NodeLabels.ReturnToCity.toString());
 		var castlecrossroad = new Node(NodeLabels.CastleCrossRoad.toString());
-		var greathall = new Node(NodeLabels.GreatHall.toString());
 		var getsword = new Node(NodeLabels.Getsword.toString());
 		var swordcity = new Node(NodeLabels.Sword_city.toString());
 		var swordblacksmith = new Node(NodeLabels.swordBlackSmith.toString());
@@ -151,11 +147,11 @@ public class ShortStory_main implements IStory{
 				Icons.unlock,
 				"Put on Cloth",
 				true), peasantClothing);
-		peasantClothing.addChild(new ActionChoice("Open",
+		peasantClothing.addChild(new ActionChoice("Leave",
 				placeList.get(ThingNames.home).getFurniture("Door"),
 				Icons.door,
-				"Open the door",
-				true), city);
+				"Leave the house",
+				true),city);
 		city.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
 				"city.WestEnd",
 				Condition.arrived),
@@ -169,12 +165,12 @@ public class ShortStory_main implements IStory{
 		// 1 castle 2 blacksmith
 		castlecrossroad.addChild(new ActionChoice("Open",
 				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
-				Icons.door,
+				Icons.unlock,
 				"Open the Gate",
 				true),
 				getsword);
 		getsword.addChild(new ActionChoice("Open",
-				placeList.get(ThingNames.castlecrossroad).getFurniture("Gate"),
+				placeList.get(ThingNames.GreatHall).getFurniture("Gate"),
 				Icons.unlock,
 				"Open the Gate",
 				true), swordcity);
@@ -205,15 +201,17 @@ public class ShortStory_main implements IStory{
 				"Talk to blacksmith",
 				true), gethelmet);
 		
-		gethelmet.addChild(new PositionChoice(
-				characterList.get(ThingNames.jojo),
-				"Blacksmith.Door", Condition.arrived), helmetcity);
+		gethelmet.addChild(new ActionChoice("Leave",
+				placeList.get(ThingNames.BShouse).getFurniture("Door"),
+				Icons.unlock,
+				"Leave to city",
+				true), helmetcity);
 		helmetcity.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
-				"city.WestEnd", Condition.arrived), failspookyroad);
+				"city.EastEnd", Condition.arrived), failspookyroad);
 		helmetcity.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
-				"city.EastEnd", Condition.arrived), helmetcrossroad);
+				"city.WestEnd", Condition.arrived), helmetcrossroad);
 		
 		helmetcrossroad.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
@@ -223,9 +221,24 @@ public class ShortStory_main implements IStory{
 				"GreatHall.Gate", Condition.arrived), successspookyroad);
 		
 		// camp route
-		failspookyroad.addChild(new SelectionChoice("Revive"), 
+		failspookyroad.addChild(new ActionChoice("Attack 1",
+				characterList.get(ThingNames.bandit1),
+				Icons.swords,
+				"Attack the bandit",
+				true),banditwin);
+		failspookyroad.addChild(new ActionChoice("Attack 2",
+				characterList.get(ThingNames.bandit2),
+				Icons.swords,
+				"Attack the bandit",
+				true),banditwin);
+		failspookyroad.addChild(new ActionChoice("Attack 3",
+				characterList.get(ThingNames.bandit3),
+				Icons.swords,
+				"Attack the bandit",
+				true),banditwin);
+		banditwin.addChild(new SelectionChoice("Revive"), 
 				guardcamp);
-		failspookyroad.addChild(new SelectionChoice("Die"), 
+		banditwin.addChild(new SelectionChoice("Die"), 
 				banditGameOver);
 		guardcamp.addChild(new ActionChoice("Take",
 				itemList.get(ThingNames.Greenpotion),
@@ -293,6 +306,8 @@ public class ShortStory_main implements IStory{
 		clothport.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
 				"Port.Exit", Condition.arrived), clothgameoverleave);
+		
+		
 		clothport.addChild(new ActionChoice("Beggar",
 				characterList.get(ThingNames.guard),
 				Icons.talk,
@@ -307,7 +322,7 @@ public class ShortStory_main implements IStory{
 		return init;
 	}
 
-	
+
 	@Override
 	public void getThings() {
 		characterList.put(ThingNames.jojo,new Character(ThingNames.jojo.toString(),BodyTypes.F,Clothing.Naked, HairStyle.Spiky));
@@ -348,6 +363,7 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		//Character Creation
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard)));
+		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.guard2)));
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.blacksmith)));
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.bandit1)));
 		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.warlock)));
@@ -396,7 +412,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("It is morning, time to wake up!"));
 		SQ.add(new SetDialog("Lets put the cloth on"));
-		SQ.add(new Wait(6));
+		SQ.add(new Wait(3));
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Naked));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
@@ -411,13 +427,44 @@ public class ShortStory_main implements IStory{
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Peasant));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Lets go to the City"));
+		SQ.add(new Wait(3));
 		SQ.add(new ShowDialog(false));
 		return SQ;
 	}
 	private ActionSequence getCitySQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new FadeOut(true));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city)));
+		SQ.add(new EnableInput(false));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city),"GreenHouseDoor"));
+		SQ.add(new Position(characterList.get(ThingNames.guard),placeList.get(ThingNames.city),"Fountain"));
+		SQ.add(new Position(characterList.get(ThingNames.guard2),placeList.get(ThingNames.city),"BrownHouseDoor"));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.guard2)));
+		SQ.add(new FadeOut(false));
+		SQ.add(new WalkTo(characterList.get(ThingNames.guard2),characterList.get(ThingNames.guard)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Have your herd about the bandit in the Forest?"));
+		SQ.add(new Wait(1));
+		SQ.add(new SetDialog("The King is calling some bravery to help"));
+		SQ.add(new Wait(2));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.guard)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Where can I find the bandit?"));
+		SQ.add(new Wait(1));
+		SQ.add(new SetDialog("I think you can just walk through the EastEnd to meet them, Be careful"));
+		SQ.add(new Wait(3));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new SetDialog("I need some gears before I go"));
+		SQ.add(new Wait(3));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new EnableInput(true));
+		return SQ;
+	}
+	private ActionSequence getquickCitySQ() {
+		var SQ = new ActionSequence();
+		SQ.add(new FadeOut(true));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city),"GreenHouseDoor"));
 		SQ.add(new FadeOut(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
@@ -438,8 +485,6 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
-		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
 		SQ.add(new Position(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall),"Throne"));
 		SQ.add(new Sit(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall).getFurniture("Throne")));
 		SQ.add(new Position(itemList.get(ThingNames.sword),placeList.get(ThingNames.GreatHall),"Table"));

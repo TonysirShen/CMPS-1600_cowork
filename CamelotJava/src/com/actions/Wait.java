@@ -1,4 +1,4 @@
-package com.actions
+package com.actions;
 import com.actions.IAction;
 
 public class Wait implements IAction {
