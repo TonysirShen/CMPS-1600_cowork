@@ -53,7 +53,7 @@ public class PositionChoice implements IPlayerChoice{
 	
 	@Override
 	public String getInputMsg() {
-		return String.format("input $ %s position %s", condition.toString(), character.getName(), position);
+		return String.format("input %s %s position %s", condition.toString(), character.getName(), position);
 	}
-
+		// return String.format("input %s %s position %s", condition.toString(), character.getName(), position)
 }

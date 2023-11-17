@@ -27,7 +27,6 @@ public class Create<T extends IThing<?>> implements IAction {
 	public boolean getShouldWait() {
 		return true;
 	}
-	
 	/**
 	 * @return CreateCharacter, CreateItem, or CreatePlace
 	 */
