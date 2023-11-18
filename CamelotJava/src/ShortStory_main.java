@@ -282,12 +282,12 @@ public class ShortStory_main implements IStory{
 				Condition.arrived),
 				successspookyroad);
 		//side quest
-		cityarrest.addChild(new ActionChoice("Guard",
+		cityarrest.addChild(new ActionChoice("Fight",
 				characterList.get(ThingNames.guard),
 				Icons.draw,
 				"Fight with Guard",
 				true), jailgameover);
-		cityarrest.addChild(new ActionChoice("Guard",
+		cityarrest.addChild(new ActionChoice("Talk",
 				characterList.get(ThingNames.guard),
 				Icons.talk,
 				"Talk to Guard",
@@ -302,22 +302,25 @@ public class ShortStory_main implements IStory{
 				characterList.get(ThingNames.merchant),
 				Icons.talk,
 				"Talk to the merchant",
-				true), clothport);
+				true), merchanttalk);
+		
+		merchanttalk.addChild(new SelectionChoice("Buy"),clothport);
+				
+				
 		clothport.addChild(new PositionChoice(
 				characterList.get(ThingNames.jojo),
 				"Port.Exit", Condition.arrived), clothgameoverleave);
 		
 		
 		clothport.addChild(new ActionChoice("Beggar",
-				characterList.get(ThingNames.guard),
+				characterList.get(ThingNames.beggar),
 				Icons.talk,
 				"Give to beggar",
 				true), returntocity);
-		returntocity.addChild(new ActionChoice("Exit",
-				placeList.get(ThingNames.Port).getFurniture("Exit"),
-				Icons.exit,
-				"Return to the city",
-				true), city);
+		returntocity.addChild(new PositionChoice(
+				characterList.get(ThingNames.jojo),
+				"Port.Exit",
+				Condition.arrived), city);
 		
 		return init;
 	}
@@ -748,7 +751,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new FadeOut(true));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Things gone black on your eyes.\n"));
-		SQ.add(new SetDialog("[Die|I fell too tired\n][Revive|I DO NOT want to submit!]"));
+		SQ.add(new SetDialog("[Die|I fell too tired     ][Revive|I DO NOT want to submit!]"));
 		return SQ;
 	}
 	
@@ -768,6 +771,7 @@ public class ShortStory_main implements IStory{
 	private ActionSequence getGuardCampSQ() {
 		var SQ = new ActionSequence();
 		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(false));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.camp),"Plant"));
 		SQ.add(new Position(characterList.get(ThingNames.merchant),placeList.get(ThingNames.camp),"Barrel"));
 		SQ.add(new Die(characterList.get(ThingNames.jojo)));
@@ -786,7 +790,10 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("You quicky stand up and try to find if there is anything to help"));
 		SQ.add(new ShowDialog(false));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.camp),"Plant"));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Die(characterList.get(ThingNames.jojo),false));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.camp)));
+		SQ.add(new FadeOut(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
