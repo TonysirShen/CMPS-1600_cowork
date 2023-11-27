@@ -20,7 +20,7 @@ import com.playerInput.ActionChoice.Icons;
 import com.playerInput.PositionChoice.Condition;
 import com.sequences.CharacterCreation;
  	
-public class ShortStory_desktop implements IStory{
+public class ShortStory_main implements IStory{
 	private Hashtable<ThingNames,Character> characterList = new Hashtable<ThingNames,Character>();
 	private Hashtable<ThingNames,Place> placeList = new Hashtable<ThingNames,Place>();
 	private Hashtable<ThingNames,Item> itemList = new Hashtable<ThingNames,Item>();
@@ -33,7 +33,7 @@ public class ShortStory_desktop implements IStory{
 		campGameOVER, GreatHall, CityArrest,JailGameOver, StartJailQuest, ClothGameOverLeave, ClothGameOverSteal, MerchantTalk, ClothPort,
 		ReturnToCity,Restart	
 	}
-	public ShortStory_desktop() {
+	public ShortStory_main() {
 		getThings();
 	}
 
