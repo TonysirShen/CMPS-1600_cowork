@@ -273,7 +273,7 @@ public class ShortStory_desktop implements IStory{
 				"Camp.Exit", Condition.arrived), successspookyroad);
 		// success ending
 		successspookyroad.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
-				"SpookyPath.EastEnd",
+				"Spookypath.EastEnd",
 				Condition.arrived),
 				ruins);
 		ruins.addChild(new ActionChoice("Take",
