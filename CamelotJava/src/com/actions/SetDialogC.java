@@ -9,6 +9,10 @@ public class SetDialogC implements IAction {
 		this.character = c;
 		this.position = s;
 	}
+	public SetDialogC(String s) {
+		this.character = null;
+		this.position = s;
+	}
 	@Override
 	public String getName() {
 		if (position.equals("left") || position.equals("Left")) {
@@ -25,6 +29,9 @@ public class SetDialogC implements IAction {
 		return false;
 	}
 	public String toString() {
+		if(character == null) {
+			return String.format("%s(null)", getName());
+		}
 		return String.format("%s(%s)", getName(), character.getName());
 	}
 }
