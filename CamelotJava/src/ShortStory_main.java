@@ -287,6 +287,9 @@ public class ShortStory_main implements IStory{
 				Icons.swords,
 				"Attack the bandit",
 				true),banditsubmit);
+		banditsubmit.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
+				"Spookypath.EastEnd",
+				Condition.arrived), ruins);
 		ruins.addChild(new ActionChoice("Take",
 				characterList.get(ThingNames.blacksmith),
 				Icons.research,
@@ -493,7 +496,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialogC(characterList.get(ThingNames.guard2),"Left"));
 		SQ.add(new SetDialogC(characterList.get(ThingNames.guard),"Right"));
-		SQ.add(new SetDialog("Have your herd about the bandit in the Forest?"));
+		SQ.add(new SetDialog("Have your heard about the bandit in the Forest?"));
 		SQ.add(new Wait(1));
 		SQ.add(new SetDialog("The King is calling some bravery to help"));
 		SQ.add(new Wait(2));
