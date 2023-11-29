@@ -272,10 +272,21 @@ public class ShortStory_main implements IStory{
 				characterList.get(ThingNames.jojo),
 				"Camp.Exit", Condition.arrived), successspookyroad);
 		// success ending
-		successspookyroad.addChild(new PositionChoice(characterList.get(ThingNames.jojo),
-				"SpookyPath.EastEnd",
-				Condition.arrived),
-				ruins);
+		successspookyroad.addChild(new ActionChoice("Attack 1",
+				characterList.get(ThingNames.bandit1),
+				Icons.swords,
+				"Attack the bandit",
+				true),banditsubmit);
+		successspookyroad.addChild(new ActionChoice("Attack 2",
+				characterList.get(ThingNames.bandit2),
+				Icons.swords,
+				"Attack the bandit",
+				true),banditsubmit);
+		successspookyroad.addChild(new ActionChoice("Attack 3",
+				characterList.get(ThingNames.bandit3),
+				Icons.swords,
+				"Attack the bandit",
+				true),banditsubmit);
 		ruins.addChild(new ActionChoice("Take",
 				characterList.get(ThingNames.blacksmith),
 				Icons.research,
@@ -706,8 +717,9 @@ public class ShortStory_main implements IStory{
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.Spookypath),"WestEnd"));
-		SQ.add(new Position(characterList.get(ThingNames.bandit1),placeList.get(ThingNames.Spookypath),"WestEnd"));
-		SQ.add(new Position(characterList.get(ThingNames.bandit2),placeList.get(ThingNames.Spookypath),"WestEnd"));
+		SQ.add(new Position(characterList.get(ThingNames.bandit1),placeList.get(ThingNames.Spookypath),"PathBlock"));
+		SQ.add(new Position(characterList.get(ThingNames.bandit2),placeList.get(ThingNames.Spookypath),"Well"));
+		SQ.add(new Position(characterList.get(ThingNames.bandit3),placeList.get(ThingNames.Spookypath),"East
 		SQ.add(new Position(characterList.get(ThingNames.bandit3),placeList.get(ThingNames.Spookypath),"WestEnd"));
 		SQ.add(new Position(itemList.get(ThingNames.Hammer1),characterList.get(ThingNames.bandit1)));
 		SQ.add(new Position(itemList.get(ThingNames.Hammer2),characterList.get(ThingNames.bandit2)));
