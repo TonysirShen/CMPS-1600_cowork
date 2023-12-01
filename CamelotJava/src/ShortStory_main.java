@@ -1321,6 +1321,7 @@ public class ShortStory_main implements IStory{
 	}
 	// restart
 	private ActionSequence getRestartSQ() {
+		
 		var SQ = new ActionSequence();
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home)));
