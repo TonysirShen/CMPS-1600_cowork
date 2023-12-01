@@ -144,7 +144,7 @@ public class ShortStory_main implements IStory{
 				placeList.get(ThingNames.home).getFurniture("Door"),
 				Icons.unlock,
 				"Open the door",
-				true), cityarrest);
+				true),cityarrest);
 		start.addChild(new ActionChoice("Open",
 				placeList.get(ThingNames.home).getFurniture("Chest"),
 				Icons.unlock,
@@ -223,10 +223,15 @@ public class ShortStory_main implements IStory{
 				Icons.unlock,
 				"Go inside castle",
 				true), helmetgreathall);
+		helmetgreathall.addChild(new ActionChoice("King",
+				characterList.get(ThingNames.king),
+				Icons.talk,
+				"Talk to King",
+				true), helmetgetsword);
 		helmetgetsword.addChild(new ActionChoice("Leave",
 				placeList.get(ThingNames.GreatHall).getFurniture("Gate"),
 				Icons.unlock,
-				"Leave to city",
+				"Begin your quest",
 				true), successspookyroad);
 		
 		// camp route
@@ -301,21 +306,26 @@ public class ShortStory_main implements IStory{
 				Icons.draw,
 				"Fight with Guard",
 				true), jailgameover);
+		
+		jailgameover.addChild(new SelectionChoice("Restart"),restart);
+		
 		cityarrest.addChild(new ActionChoice("Talk",
 				characterList.get(ThingNames.guard),
 				Icons.talk,
 				"Talk to Guard",
 				false), startjailquest);
-		jailgameover.addChild(new SelectionChoice("Restart"),restart);
+
 		startjailquest.addChild(new ActionChoice("Cloth",
 				itemList.get(ThingNames.Bluecloth),
 				Icons.snake,
 				"Steal the cloth",
 				true), clothgameoversteal);
+		
+		clothgameoversteal.addChild(new SelectionChoice("Restart"),restart);
 		startjailquest.addChild(new ActionChoice("Merchant",
 				characterList.get(ThingNames.merchant),
 				Icons.talk,
-				"Talk to the merchant",
+				"Buy cloth from Merchant",
 				true), merchanttalk);
 		
 		merchanttalk.addChild(new SelectionChoice("Buy"),clothport);
@@ -325,16 +335,16 @@ public class ShortStory_main implements IStory{
 				characterList.get(ThingNames.jojo),
 				"Port.Exit", Condition.arrived), clothgameoverleave);
 		
+		clothgameoverleave.addChild(new SelectionChoice("Restart"),restart);
+		
 		
 		clothport.addChild(new ActionChoice("Beggar",
 				characterList.get(ThingNames.beggar),
 				Icons.talk,
 				"Give to beggar",
 				true), returntocity);
-		returntocity.addChild(new PositionChoice(
-				characterList.get(ThingNames.jojo),
-				"Port.Exit",
-				Condition.arrived), city);
+
+		returntocity.addChild(new SelectionChoice("Leave"),city);
 		//restart node
 		restart.addChild(new SelectionChoice("Resume"), start);
 		return init;
@@ -460,7 +470,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.home),"Bed"));
 		SQ.add(new Wait(3));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("Let's try not to go out naked.I remember my colth is in the CHEST."));
+		SQ.add(new SetDialog("Let's try not to go out naked.I remember my cloth is in the CHEST."));
 		SQ.add(new Wait(4));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new EnableInput(true));
@@ -518,7 +528,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("Here can I find some gears before I go?"));
+		SQ.add(new SetDialog("Where can I find some gears before I go?"));
 		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Wait(2));
@@ -559,7 +569,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new SetDialogC(characterList.get(ThingNames.king),"Right"));
 		SQ.add(new SetDialog("Nice to meet you my king."));
 		SQ.add(new Wait(2));
-		SQ.add(new SetDialog("I have heard you are looking for someone to kill the banfits?"));
+		SQ.add(new SetDialog("I have heard you are looking for someone to kill the bandits?"));
 		SQ.add(new Wait(2));
 		SQ.add(new SetDialog("I am willing to help."));
 		SQ.add(new Wait(3));
@@ -650,33 +660,39 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Position(characterList.get(ThingNames.blacksmith),placeList.get(ThingNames.BShouse),"Anvil"));
 		SQ.add(new Position(itemList.get(ThingNames.helmet),placeList.get(ThingNames.BShouse),"Anvil"));
 		SQ.add(new FadeOut(false));
-		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("You are looking pretty unprepared. I think I can help you out. \n Here take my helmet, so you can defeat the warlock."));
-		SQ.add(new ShowDialog(false));
-		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet) ));
-		SQ.add(new Give(characterList.get(ThingNames.blacksmith), itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
-		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("Now go. Defeat the warlock."));
-		SQ.add(new ShowDialog(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getGetHelmetSQ() {
+
 		var SQ = new ActionSequence();
 		SQ.add(new ShowDialog(true));
 		SQ.add(new EnableInput(false));
-		SQ.add(new SetDialog("My warrior, you can take the helmet."));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.blacksmith), "Right"));
+		SQ.add(new SetDialog("You are looking pretty unprepared. I think I can help you out."));
+		SQ.add(new Wait(3));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("You are almost ready. All you need is a proper weapon."));
+		SQ.add(new SetDialog("You can take the helmet."));
+		SQ.add(new Wait(2));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.jojo), "Left"));
+		SQ.add(new SetDialog("Thank you very much."));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Take(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet)));
 		SQ.add(new Give(characterList.get(ThingNames.blacksmith),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
-		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmour));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("You are almost ready. All you need is a proper weapon."));
+		SQ.add(new Wait(3));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.helmet)));
 		SQ.add(new EnableInput(true));;
 		return SQ;
 	}
 	private ActionSequence getHelmetCitySQ() {
+
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
@@ -686,12 +702,15 @@ public class ShortStory_main implements IStory{
 		return SQ;
 	}	
 	private ActionSequence getHelmetCrossroadSQ() {
+
 		var SQ = new ActionSequence();
 		SQ.add(new FadeOut(true));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.castlecrossroad)));
 		SQ.add(new FadeOut(false));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC("Right"));
 		SQ.add(new SetDialog("Lets go meet the King and grab the sword. Then we can fight the warlock."));
+		SQ.add(new Wait(3));
 		SQ.add(new ShowDialog(false));
 		return SQ;
 	}
@@ -699,21 +718,35 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new FadeOut(true));
-		SQ.combineWith(new CharacterCreation(characterList.get(ThingNames.king)));
-		SQ.add(new Create<Item>(itemList.get(ThingNames.sword)));
 		SQ.add(new Position(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall),"Throne"));
+		SQ.add(new Position(itemList.get(ThingNames.sword),characterList.get(ThingNames.king)));
 		SQ.add(new Sit(characterList.get(ThingNames.king),placeList.get(ThingNames.GreatHall).getFurniture("Throne")));
-		SQ.add(new Position(itemList.get(ThingNames.sword),placeList.get(ThingNames.GreatHall),"Table"));
+		SQ.add(new Position(itemList.get(ThingNames.sword),placeList.get(ThingNames.GreatHall),""));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.GreatHall),"Gate"));	
 		SQ.add(new FadeOut(false));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getHelmetGetSwordSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.king)));
+		SQ.add(new EnableInput(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.king), "Right"));
+		SQ.add(new SetDialog("I need you help my King. I need a weapon."));
+		SQ.add(new Wait(4));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Here is my sword warrior. Use it to defeat the evil warlock. You are ready."));
-		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
+		SQ.add(new Wait(4));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new Give(characterList.get(ThingNames.king),itemList.get(ThingNames.sword),characterList.get(ThingNames.jojo)));
 		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.sword)));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmour));
+		SQ.add(new Wait(1));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Thank you my King. I will not fail you."));
+		SQ.add(new Wait(4));
+		SQ.add(new ShowDialog(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
@@ -829,8 +862,10 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Wait(1));
 		SQ.add(new SetDialog("Lets go back to the castle to get our reward"));
 		SQ.add(new Position(characterList.get(ThingNames.warlock),itemList.get(ThingNames.local)));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.Ruins),"Altar"));
 		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
+		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getGreatHallRewardSQ() {
@@ -891,10 +926,12 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new SetDialogC("Right"));
+		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("I think I am ready for my advanture."));
 		SQ.add(new Wait(1));
 		SQ.add(new SetDialog("Time to go."));
 		SQ.add(new Wait(2));
+		SQ.add(new ShowDialog(false));
 		SQ.add(new FadeOut(true));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.Spookypath),"WestEnd"));
 		SQ.add(new Position(characterList.get(ThingNames.bandit1),placeList.get(ThingNames.Spookypath),"PathBlock"));
@@ -1018,6 +1055,7 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialogC(characterList.get(ThingNames.merchant),"Right"));
 		SQ.add(new SetDialog("Hi!Can I buy something with this coin?"));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Give(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Coin),characterList.get(ThingNames.merchant)));
 		SQ.add(new Pocket(characterList.get(ThingNames.merchant),itemList.get(ThingNames.Coin)));
@@ -1043,9 +1081,12 @@ public class ShortStory_main implements IStory{
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Give(characterList.get(ThingNames.guard),itemList.get(ThingNames.helmet),characterList.get(ThingNames.jojo)));
 		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.helmet)));
+		SQ.add(new Give(characterList.get(ThingNames.guard),itemList.get(ThingNames.sword),characterList.get(ThingNames.jojo)));
+		SQ.add(new SetClothing(characterList.get(ThingNames.guard),Clothing.LightArmour));
 		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.HeavyArmour));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Time to regain my honor!"));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new EnableInput(true));
 		
@@ -1089,27 +1130,31 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.city),"GreenHouseDoor"));
 		SQ.add(new Position(characterList.get(ThingNames.guard),placeList.get(ThingNames.city),"Fountain"));
 		SQ.add(new FadeOut(false));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.guard)));
 		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.jojo)));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("You can't walk around here naked. You are going to jail."));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.guard), "Right"));
+		SQ.add(new SetDialog("You can't walk around here naked. You are going to jail. I will give you clothes to wear."));
 		SQ.add(new Wait(3));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new FadeOut(true));
+		SQ.add(new SetCameraFocus(characterList.get(ThingNames.jojo)));
 		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.jail),"DirtPile"));
 		SQ.add(new Position(characterList.get(ThingNames.guard),placeList.get(ThingNames.jail),"CellDoor"));
+		SQ.add(new SetClothing(characterList.get(ThingNames.jojo),Clothing.Peasant));
 		SQ.add(new FadeOut(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getJailGameOverSQ() {
 
-
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.guard), "Right"));
 		SQ.add(new SetDialog("That was a mistake. You should have been respectful."
 				+ "You are going to be stuck in here for a long time."));
-		SQ.add(new Wait(4));
+		SQ.add(new Wait(5));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("GAME OVER"));
@@ -1124,29 +1169,40 @@ public class ShortStory_main implements IStory{
 	}
 	private ActionSequence getStartJailQuestSQ() {
 
+
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.guard), "Right"));
 		SQ.add(new SetDialog("I will give you the opportunity to leave jail if you do something good."
 				+ " I want you to give back to the homeless."));
-		SQ.add(new Wait(4));
+		SQ.add(new Wait(6));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Some ships just came into the port this morning. You can find what "
 				+ "you need there. This is your only chance."));
-		SQ.add(new Wait(4));
+		SQ.add(new Wait(6));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new FadeOut(true));
-		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.Port),"Exit"));
+		SQ.add(new Position(characterList.get(ThingNames.jojo),placeList.get(ThingNames.Port)));
 		SQ.add(new Position(characterList.get(ThingNames.merchant),placeList.get(ThingNames.Port),"BigStall"));
-		SQ.add(new Position(characterList.get(ThingNames.beggar),placeList.get(ThingNames.Port),"Barrel"));
+		SQ.add(new Position(characterList.get(ThingNames.beggar),placeList.get(ThingNames.Port),"SmallStall"));
 		SQ.add(new Position(characterList.get(ThingNames.guard),placeList.get(ThingNames.Port),"Exit"));
 		SQ.add(new Position(itemList.get(ThingNames.Bluecloth),placeList.get(ThingNames.Port),"BigStall"));
+		SQ.add(new Position(itemList.get(ThingNames.Coin),characterList.get(ThingNames.guard)));
 		SQ.add(new FadeOut(false));
+		//add face
+		SQ.add(new Give(characterList.get(ThingNames.guard),itemList.get(ThingNames.Coin),characterList.get(ThingNames.jojo)));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Here is a coin I got from your home. Use it wisely."));
+		SQ.add(new Wait(2));
+		SQ.add(new ShowDialog(false));
 		SQ.add(new EnableInput(true));
 		return SQ;
 	}
 	private ActionSequence getClothGameOverStealSQ() {
+
+
 
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
@@ -1154,31 +1210,51 @@ public class ShortStory_main implements IStory{
 		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.beggar)));
 		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.beggar)));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.guard), "Right"));
 		SQ.add(new SetDialog("Did you pay for those clothes? I don't think so."
 				+ "You are going back to jail for a long time."));
-		SQ.add(new Wait(10));
+		SQ.add(new Wait(5));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("GAME OVER"));
 		SQ.add(new Wait(3));
-		SQ.add(new ShowDialog(false));
 		SQ.add(new FadeOut(true));
+		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth)));
+		SQ.add(new Wait(1));
+		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Restart?"));
+		SQ.add(new SetDialog("[Restart|Yes    ][No|No]"));
+		
 		
 		return SQ;
 	}
 	private ActionSequence getClothGameOverLeaveSQ() {
 
+
+
+
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
-		SQ.add(new Take(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth)));
-		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.guard)));//might need to change walk
+		//add face
+		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.jojo)));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.guard), "Right"));
 		SQ.add(new SetDialog("Where do you think you are going. Are you trying to escape."
 				+ "You are going back to jail for a long time."));
+		SQ.add(new Wait(7));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("GAME OVER"));
+		SQ.add(new Wait(3));
+		SQ.add(new FadeOut(true));
+		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth)));
+		SQ.add(new Wait(1));
 		SQ.add(new ShowDialog(false));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Restart?"));
+		SQ.add(new SetDialog("[Restart|Yes    ][No|No]"));
+		SQ.add(new SetDialogC("Right"));
 		return SQ;
 	}
 	private ActionSequence getMerchantTalkSQ() {
@@ -1187,24 +1263,28 @@ public class ShortStory_main implements IStory{
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.merchant), "Right"));
 		SQ.add(new SetDialog("What can I help you with today?"));
-		SQ.add(new Wait(4));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.jojo), "Left"));
 		SQ.add(new SetDialog("Can I buy one blue cloth?"));
-		SQ.add(new Wait(4));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.merchant), "Right"));
 		SQ.add(new SetDialog("Certainly. That will be one gold coin."));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.jojo), "Left"));
 		SQ.add(new SetDialog("[Buy| Ok I will buy it.]"));
-		
 		return SQ;
 	}
 	private ActionSequence getClothPortSQ() {
 
 		var SQ = new ActionSequence();
+		
 		SQ.add(new ShowDialog(false));
-		//SQ.add(new Give(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Coin),characterList.get(ThingNames.merchant)));
+		SQ.add(new Give(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Coin),characterList.get(ThingNames.merchant)));
 		SQ.add(new Take(characterList.get(ThingNames.merchant),itemList.get(ThingNames.Bluecloth)));
 		SQ.add(new Give(characterList.get(ThingNames.merchant),itemList.get(ThingNames.Bluecloth),characterList.get(ThingNames.jojo)));
 		SQ.add(new EnableInput(true));
@@ -1212,28 +1292,31 @@ public class ShortStory_main implements IStory{
 	}
 	private ActionSequence getReturnToCitySQ() {
 
-
 		var SQ = new ActionSequence();
 		SQ.add(new EnableInput(false));
-		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.beggar)));
-		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.beggar)));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.jojo), "Left"));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.beggar), "Right"));
 		SQ.add(new SetDialog("Here you go. Enjoy."));
-		SQ.add(new Wait(5));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
+		SQ.add(new Give(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth),characterList.get(ThingNames.beggar)));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Thank you so much."));//beggar
-		SQ.add(new Wait(5));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
+		SQ.add(new WalkTo(characterList.get(ThingNames.jojo),characterList.get(ThingNames.guard)));
 		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialogC(characterList.get(ThingNames.guard), "Right"));
 		SQ.add(new SetDialog("You did a good thing. You are free to go."));//guard
-		SQ.add(new Wait(7));
-		SQ.add(new ShowDialog(true));
+		SQ.add(new Wait(3));
 		SQ.add(new SetDialog("Don't screw up again. I won't be as nice next time."));//guard
-		SQ.add(new Wait(9));
+		SQ.add(new Wait(4));
 		SQ.add(new ShowDialog(false));
+		SQ.add(new Wait(1));
+		SQ.add(new ShowDialog(true));
 		SQ.add(new EnableInput(true));
-		
+		SQ.add(new SetDialog("[Leave| Would you like to return to the city?"));//guard
 		return SQ;
 	}
 	// restart
