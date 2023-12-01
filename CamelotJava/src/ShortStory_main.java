@@ -254,6 +254,7 @@ public class ShortStory_main implements IStory{
 				guardcamp);
 		banditwin.addChild(new SelectionChoice("Die"), 
 				banditGameOver);
+		banditGameOver.addChild(new SelectionChoice("Restart"),restart);
 		guardcamp.addChild(new ActionChoice("Open",
 				placeList.get(ThingNames.camp).getFurniture("Chest"),
 				Icons.unlock,
@@ -264,6 +265,7 @@ public class ShortStory_main implements IStory{
 				Icons.drink,
 				"Steal the potion",
 				true), campGameOver);
+		campGameOver.addChild(new SelectionChoice("Restart"),restart);
 		findCoin.addChild(new ActionChoice("Talk",
 				characterList.get(ThingNames.merchant),
 				Icons.talk,
@@ -978,15 +980,20 @@ public class ShortStory_main implements IStory{
 	//Bandit submit end
 	private ActionSequence getBanditGameOverSQ() {
 		var SQ = new ActionSequence();
-		SQ.add(new ShowDialog(false));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("I feel so tired, I want nothing but sleep."));
+		SQ.add(new SetDialog("I feel so tried, I want nothing but sleep"));
 		SQ.add(new Wait(1));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Wait(1));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("YOU DIED"));
+		SQ.add(new Wait(1));
 		SQ.add(new ShowDialog(false));
+		SQ.add(new Wait(1));
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Restart?"));
+		SQ.add(new SetDialog("[Restart|Yes    ][No|No]"));
+	
 		return SQ;
 	}
 		
@@ -1108,15 +1115,23 @@ public class ShortStory_main implements IStory{
 		SQ.add(new Pocket(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Greenpotion)));
 		SQ.add(new ShowDialog(true));
 		SQ.add(new SetDialog("Lets find a place to drink the potion"));
+		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new WalkTo(characterList.get(ThingNames.guard),characterList.get(ThingNames.jojo)));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("You think I am BLIND?"));
-		SQ.add(new Attack(characterList.get(ThingNames.guard),characterList.get(ThingNames.jojo),true));
+		SQ.add(new SetDialog("You think I am blind?"));
+		SQ.add(new Wait(1));
 		SQ.add(new ShowDialog(false));
+		SQ.add(new Attack(characterList.get(ThingNames.guard),characterList.get(ThingNames.jojo),true));
 		SQ.add(new ShowDialog(true));
-		SQ.add(new SetDialog("\n YOU DIED \n"));
+		SQ.add(new SetDialogC("Right"));
+		SQ.add(new SetDialog(" YOU DIED"));
+		SQ.add(new Wait(1));
 		SQ.add(new ShowDialog(false));;
+		SQ.add(new ShowDialog(true));
+		SQ.add(new SetDialog("Restart?"));
+		SQ.add(new SetDialog("[Restart|Yes    ][No|No]"));
+		
 		return SQ;
 	}
 	
