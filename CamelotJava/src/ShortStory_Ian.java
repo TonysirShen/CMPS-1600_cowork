@@ -1180,6 +1180,7 @@ public class ShortStory_Ian implements IStory{
 		SQ.add(new SetDialogC(characterList.get(ThingNames.jojo), "Left"));
 		SQ.add(new SetDialogC(characterList.get(ThingNames.beggar), "Right"));
 		SQ.add(new SetDialog("Here you go. Enjoy."));
+		
 		SQ.add(new Wait(2));
 		SQ.add(new ShowDialog(false));
 		SQ.add(new Give(characterList.get(ThingNames.jojo),itemList.get(ThingNames.Bluecloth),characterList.get(ThingNames.beggar)));
