@@ -14,7 +14,7 @@ public class OpenFurniture implements IAction {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "Open Furniture";
+		return "OpenFurniture";
 	}
 
 	@Override
